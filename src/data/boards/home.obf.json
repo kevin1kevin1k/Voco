@@ -1,0 +1,71 @@
+{
+  "format": "open-board-0.1",
+  "id": "home",
+  "locale": "zh-TW",
+  "name": "住家",
+  "ext_voco_display_type": "vsd",
+  "ext_voco_background": {
+    "image_id": "img-living-room",
+    "width": 1200,
+    "height": 800
+  },
+  "buttons": [
+    {
+      "id": "btn-tv",
+      "label": "電視",
+      "vocalization": "我想看電視",
+      "ext_voco_hotspot": {
+        "x": 10,
+        "y": 15,
+        "width": 25,
+        "height": 30,
+        "shape": "rectangle"
+      }
+    },
+    {
+      "id": "btn-sofa",
+      "label": "沙發",
+      "vocalization": "我想坐沙發休息",
+      "ext_voco_hotspot": {
+        "x": 40,
+        "y": 50,
+        "width": 35,
+        "height": 25,
+        "shape": "rectangle"
+      }
+    },
+    {
+      "id": "btn-window",
+      "label": "窗戶",
+      "vocalization": "請幫我開窗戶",
+      "ext_voco_hotspot": {
+        "x": 70,
+        "y": 5,
+        "width": 20,
+        "height": 40,
+        "shape": "rectangle"
+      }
+    },
+    {
+      "id": "btn-light",
+      "label": "電燈",
+      "vocalization": "請幫我開燈",
+      "ext_voco_hotspot": {
+        "x": 45,
+        "y": 2,
+        "width": 10,
+        "height": 10,
+        "shape": "rectangle"
+      }
+    }
+  ],
+  "grid": null,
+  "images": [
+    {
+      "id": "img-living-room",
+      "url": "/images/scenes/living-room.jpg",
+      "content_type": "image/jpeg"
+    }
+  ],
+  "sounds": []
+}

@@ -1,0 +1,56 @@
+{
+  "format": "open-board-0.1",
+  "id": "root",
+  "locale": "zh-TW",
+  "name": "首頁",
+  "ext_voco_display_type": "grid",
+  "buttons": [
+    {
+      "id": "btn-home",
+      "label": "住家",
+      "vocalization": "住家",
+      "image_id": "img-home",
+      "background_color": "rgb(255, 224, 178)",
+      "load_board": { "id": "home" }
+    },
+    {
+      "id": "btn-family",
+      "label": "家人",
+      "vocalization": "家人",
+      "image_id": "img-family",
+      "background_color": "rgb(200, 230, 255)",
+      "load_board": { "id": "family" }
+    },
+    {
+      "id": "btn-medical",
+      "label": "醫療",
+      "vocalization": "醫療",
+      "image_id": "img-medical",
+      "background_color": "rgb(255, 205, 210)",
+      "load_board": { "id": "medical" }
+    },
+    {
+      "id": "btn-places",
+      "label": "地點",
+      "vocalization": "地點",
+      "image_id": "img-places",
+      "background_color": "rgb(200, 230, 201)",
+      "load_board": { "id": "places" }
+    }
+  ],
+  "grid": {
+    "rows": 2,
+    "columns": 2,
+    "order": [
+      ["btn-home", "btn-family"],
+      ["btn-medical", "btn-places"]
+    ]
+  },
+  "images": [
+    { "id": "img-home", "symbol": "🏠" },
+    { "id": "img-family", "symbol": "👨‍👩‍👧‍👦" },
+    { "id": "img-medical", "symbol": "🏥" },
+    { "id": "img-places", "symbol": "📍" }
+  ],
+  "sounds": []
+}

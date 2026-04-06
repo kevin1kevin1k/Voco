@@ -1,0 +1,31 @@
+.recommendation-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: #f0f4ff;
+  border-radius: 8px;
+  border: 1px solid #d0d8f0;
+  flex-wrap: wrap;
+}
+
+.recommendation-label {
+  font-size: 0.95rem;
+  color: #555;
+  font-weight: 600;
+}
+
+.recommendation-btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid #b0c0e8;
+  border-radius: 8px;
+  background: #fff;
+  color: #333;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.recommendation-btn:hover {
+  background: #e0e8ff;
+}

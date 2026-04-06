@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(chmod:*)",
+      "WebSearch",
+      "WebFetch(domain:www.openboardformat.org)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:www.rubydoc.info)",
+      "WebFetch(domain:docs.google.com)",
+      "WebFetch(domain:cboard-org.github.io)",
+      "Bash(npm create vite@latest:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run build:*)"
+    ]
+  }
+}

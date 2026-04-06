@@ -1,0 +1,23 @@
+{
+  "name": "Voco - 智慧數位溝通義肢",
+  "short_name": "Voco",
+  "description": "為表達性失語症長者設計的擴大替代溝通 (AAC) 工具",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "theme_color": "#1a1a2e",
+  "background_color": "#f5f5f5",
+  "lang": "zh-TW",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+.hotspot {
+  position: absolute;
+  background: rgba(233, 69, 96, 0.15);
+  border: 2px solid rgba(233, 69, 96, 0.5);
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 4px;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.hotspot:hover {
+  background: rgba(233, 69, 96, 0.35);
+  border-color: rgba(233, 69, 96, 0.9);
+}
+
+.hotspot:active {
+  background: rgba(233, 69, 96, 0.5);
+}
+
+.hotspot-label {
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}

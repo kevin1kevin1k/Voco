@@ -1,0 +1,55 @@
+{
+  "format": "open-board-0.1",
+  "id": "family",
+  "locale": "zh-TW",
+  "name": "家人",
+  "ext_voco_display_type": "grid",
+  "buttons": [
+    {
+      "id": "btn-wife",
+      "label": "老婆",
+      "vocalization": "老婆",
+      "background_color": "rgb(225, 190, 231)"
+    },
+    {
+      "id": "btn-son",
+      "label": "兒子",
+      "vocalization": "兒子",
+      "background_color": "rgb(187, 222, 251)"
+    },
+    {
+      "id": "btn-daughter",
+      "label": "女兒",
+      "vocalization": "女兒",
+      "background_color": "rgb(248, 187, 208)"
+    },
+    {
+      "id": "btn-grandson",
+      "label": "孫子",
+      "vocalization": "孫子",
+      "background_color": "rgb(200, 230, 201)"
+    },
+    {
+      "id": "btn-granddaughter",
+      "label": "孫女",
+      "vocalization": "孫女",
+      "background_color": "rgb(255, 224, 178)"
+    },
+    {
+      "id": "btn-daughter-in-law",
+      "label": "媳婦",
+      "vocalization": "媳婦",
+      "background_color": "rgb(255, 245, 157)"
+    }
+  ],
+  "grid": {
+    "rows": 2,
+    "columns": 3,
+    "order": [
+      ["btn-wife", "btn-son", "btn-daughter"],
+      ["btn-grandson", "btn-granddaughter", "btn-daughter-in-law"]
+    ]
+  },
+  "images": [],
+  "sounds": []
+}
