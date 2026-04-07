@@ -46,7 +46,7 @@ export default function GridView({ board }) {
           const button = buttonMap[btnId];
           if (!button) return <div key={btnId} className="grid-empty" />;
           return (
-            <div key={btnId} role="gridcell" onClick={() => handleButtonClick(button)}>
+            <div key={btnId} role="gridcell" style={{ display: 'contents' }} onClick={() => handleButtonClick(button)}>
               <BoardButton button={button} onNavigate={handleNavigate} />
             </div>
           );
