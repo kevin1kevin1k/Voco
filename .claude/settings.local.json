@@ -14,7 +14,10 @@
       "Bash(spectra:*)",
       "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(d['state'], d['progress']\\)\")",
       "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(d['instruction']\\)\")",
-      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(d['instruction'][:500]\\)\")"
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(d['instruction'][:500]\\)\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(d['template']\\)\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\({a['id']:a['status'] for a in d['artifacts']}\\)\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); findings=[f for f in d['findings'] if f['severity'] in \\('critical','warning'\\)]; print\\(len\\(findings\\), 'critical/warning findings'\\); [print\\(f\\) for f in findings]\")"
     ]
   }
 }
