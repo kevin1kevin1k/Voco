@@ -10,7 +10,9 @@
       "WebFetch(domain:cboard-org.github.io)",
       "Bash(npm create vite@latest:*)",
       "Bash(npm install:*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(spectra:*)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(d['state'], d['progress']\\)\")"
     ]
   }
 }

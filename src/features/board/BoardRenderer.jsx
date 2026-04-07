@@ -11,7 +11,7 @@ export default function BoardRenderer() {
   const board = useSelector((state) => selectBoardById(state, currentBoardId));
 
   if (!board) {
-    return <div className="board-loading">載入中...</div>;
+    return <div className="board-loading">此板面正在建立中</div>;
   }
 
   const displayType = getBoardDisplayType(board);

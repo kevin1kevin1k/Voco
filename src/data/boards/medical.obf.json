@@ -1,0 +1,55 @@
+{
+  "format": "open-board-0.1",
+  "id": "medical",
+  "locale": "zh-TW",
+  "name": "醫療",
+  "ext_voco_display_type": "grid",
+  "buttons": [
+    {
+      "id": "btn-medicine",
+      "label": "藥物",
+      "vocalization": "我需要吃藥",
+      "background_color": "rgb(255, 205, 210)"
+    },
+    {
+      "id": "btn-appointment",
+      "label": "看診",
+      "vocalization": "我要看醫生",
+      "background_color": "rgb(255, 205, 210)"
+    },
+    {
+      "id": "btn-injection",
+      "label": "打針",
+      "vocalization": "我要打針",
+      "background_color": "rgb(255, 205, 210)"
+    },
+    {
+      "id": "btn-pain",
+      "label": "痛",
+      "vocalization": "這裡很痛",
+      "background_color": "rgb(255, 205, 210)"
+    },
+    {
+      "id": "btn-uncomfortable",
+      "label": "不舒服",
+      "vocalization": "我不舒服",
+      "background_color": "rgb(255, 205, 210)"
+    },
+    {
+      "id": "btn-toilet",
+      "label": "廁所",
+      "vocalization": "我要去廁所",
+      "background_color": "rgb(255, 205, 210)"
+    }
+  ],
+  "grid": {
+    "rows": 2,
+    "columns": 3,
+    "order": [
+      ["btn-medicine", "btn-appointment", "btn-injection"],
+      ["btn-pain", "btn-uncomfortable", "btn-toilet"]
+    ]
+  },
+  "images": [],
+  "sounds": []
+}
