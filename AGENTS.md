@@ -27,6 +27,7 @@ Changes can be parked（暫存）— temporarily moved out of `openspec/changes/
 <!-- SPECTRA:END -->
 
 ## Response Format & Language
+- When the user writes in Traditional Chinese, always respond in Traditional Chinese.
 - For every implementation report response, always use Traditional Chinese.
 - For `/review` slash command responses, always use Traditional Chinese (technical terms may remain in English).
 - For every implementation report response (but not commit-only replies such as `建立 commit` after an already-reported batch), always include these sections in order:

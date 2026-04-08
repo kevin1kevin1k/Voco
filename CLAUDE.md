@@ -26,4 +26,7 @@ Changes can be parked（暫存）— temporarily moved out of `openspec/changes/
 
 <!-- SPECTRA:END -->
 
+## Response Language
+- When the user writes in Traditional Chinese, always respond in Traditional Chinese.
+
 @AGENTS.md
