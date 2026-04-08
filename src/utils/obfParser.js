@@ -63,11 +63,15 @@ export function getGridOrder(board) {
   return board.grid.order || [];
 }
 
+import { readBoardsFromStorage } from './boardStorage.js';
+
 /**
- * 載入所有板面資料
+ * 載入所有板面資料，合併靜態 JSON 與 localStorage 用戶修改
+ * localStorage 中的板面優先覆蓋同 ID 的靜態板面
  * @returns {Promise<object>} { byId, allIds }
  */
 export async function loadAllBoards() {
+
   const boardModules = import.meta.glob('/src/data/boards/*.obf.json', { eager: true });
   const byId = {};
   const allIds = [];
@@ -76,6 +80,17 @@ export async function loadAllBoards() {
     const board = module.default || module;
     byId[board.id] = board;
     allIds.push(board.id);
+  }
+
+  // Merge user-modified boards from localStorage (localStorage wins on same ID)
+  const stored = readBoardsFromStorage();
+  if (stored && stored.byId) {
+    for (const [boardId, board] of Object.entries(stored.byId)) {
+      byId[boardId] = board;
+      if (!allIds.includes(boardId)) {
+        allIds.push(boardId);
+      }
+    }
   }
 
   return { byId, allIds };

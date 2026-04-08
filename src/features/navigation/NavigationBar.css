@@ -36,10 +36,23 @@
   cursor: not-allowed;
 }
 
+.nav-title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
 .nav-title {
   font-size: 1.3rem;
   margin: 0;
-  flex-shrink: 0;
+}
+
+.nav-edit-title {
+  padding: 0.3rem 0.6rem;
+  font-size: 1rem;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 .nav-categories {
@@ -47,6 +60,35 @@
   gap: 0.5rem;
   margin-left: auto;
   flex-wrap: wrap;
+}
+
+.nav-edit-controls {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.nav-add-board {
+  background: #2a6099;
+  font-size: 1rem;
+  padding: 0.5rem 0.9rem;
+}
+
+.nav-add-board:hover {
+  background: #1e4d7a;
+}
+
+.nav-toggle-edit {
+  font-size: 1rem;
+  padding: 0.5rem 0.9rem;
+}
+
+.nav-toggle-edit--active {
+  background: #e94560;
+}
+
+.nav-toggle-edit--active:hover {
+  background: #c73350;
 }
 
 .nav-category {

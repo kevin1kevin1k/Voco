@@ -46,7 +46,6 @@ When `BoardRenderer` receives a `currentBoardId` that does not correspond to any
 
 ## Requirements
 
-
 <!-- @trace
 source: fix-homepage-dead-end
 updated: 2026-04-07
@@ -79,6 +78,36 @@ Every button in the root board that carries a `load_board.id` SHALL reference an
 
 - **WHEN** user taps any button on the `places` board
 - **THEN** the app SHALL speak the button's `vocalization` text via Web Speech API
+
+---
+### Requirement: User-created boards resolve from navigation
+
+Boards created via the caregiver edit mode (stored in localStorage) SHALL be resolvable by the navigation system. `selectBoardById` SHALL return user-created boards just as it returns static boards.
+
+#### Scenario: Navigate to user-created board
+
+- **WHEN** user creates a new board named "朋友" and navigates to it
+- **THEN** the app SHALL render the new empty Grid board with name "朋友"
+
+
+<!-- @trace
+source: caregiver-edit-mode
+updated: 2026-04-08
+code:
+  - src/features/board/GridView.css
+  - src/utils/boardStorage.js
+  - src/features/navigation/NavigationBar.css
+  - src/features/caregiver/AddBoardModal.jsx
+  - src/features/caregiver/ModalShell.css
+  - src/features/board/GridView.jsx
+  - src/features/caregiver/EditButtonModal.jsx
+  - src/app/store.js
+  - src/features/caregiver/AddButtonModal.jsx
+  - src/features/caregiver/EditBoardNameModal.jsx
+  - src/features/caregiver/ModalShell.jsx
+  - src/features/navigation/NavigationBar.jsx
+  - src/utils/obfParser.js
+-->
 
 ---
 ### Requirement: Missing board shows an informative fallback message
