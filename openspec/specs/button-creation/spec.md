@@ -8,31 +8,25 @@
 
 ### Requirement: Add button modal opens from Grid add cell
 
-Clicking the "＋ 新增按鈕" cell in edit mode SHALL open `AddButtonModal` with empty `label` and `vocalization` fields.
+The "＋ 新增按鈕" button in edit mode SHALL be rendered outside the `grid-container` element, as a sibling flex child within `grid-view`, so that it remains visible regardless of the number of grid rows or the viewport height. Clicking it SHALL open `AddButtonModal` with empty `label` and `vocalization` fields.
 
 #### Scenario: Modal opens empty
 
-- **WHEN** user clicks "＋ 新增按鈕" cell while in edit mode
+- **WHEN** user clicks "＋ 新增按鈕" while in edit mode
 - **THEN** AddButtonModal opens with label and vocalization fields both empty
+
+#### Scenario: Add button is visible on empty board
+
+- **WHEN** a board has zero buttons and user is in edit mode
+- **THEN** the "＋ 新增按鈕" button SHALL be visible near the bottom of the board area, not pushed outside the viewport
 
 
 <!-- @trace
-source: caregiver-edit-mode
-updated: 2026-04-08
+source: fix-add-button-layout
+updated: 2026-04-09
 code:
   - src/features/board/GridView.css
-  - src/utils/boardStorage.js
-  - src/features/navigation/NavigationBar.css
-  - src/features/caregiver/AddBoardModal.jsx
-  - src/features/caregiver/ModalShell.css
   - src/features/board/GridView.jsx
-  - src/features/caregiver/EditButtonModal.jsx
-  - src/app/store.js
-  - src/features/caregiver/AddButtonModal.jsx
-  - src/features/caregiver/EditBoardNameModal.jsx
-  - src/features/caregiver/ModalShell.jsx
-  - src/features/navigation/NavigationBar.jsx
-  - src/utils/obfParser.js
 -->
 
 ---

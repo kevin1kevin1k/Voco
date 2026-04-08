@@ -79,16 +79,17 @@ export default function GridView({ board }) {
           );
         })}
 
-        {isEditMode && (
-          <button
-            className="grid-add-button"
-            onClick={() => setShowAddButtonModal(true)}
-            aria-label="新增按鈕"
-          >
-            ＋ 新增按鈕
-          </button>
-        )}
       </div>
+
+      {isEditMode && (
+        <button
+          className="grid-add-button"
+          onClick={() => setShowAddButtonModal(true)}
+          aria-label="新增按鈕"
+        >
+          ＋ 新增按鈕
+        </button>
+      )}
 
       {editingButton && (
         <EditButtonModal
