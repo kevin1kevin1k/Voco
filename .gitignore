@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 .spectra/
 openspec/.vector-search.db*
+.agents/
+.claude/
