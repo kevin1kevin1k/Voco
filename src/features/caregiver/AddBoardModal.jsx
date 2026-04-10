@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { addBoard } from '../board/boardSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { addBoard, updateBoard, selectBoardById } from '../board/boardSlice';
 import { navigateTo } from '../navigation/navigationSlice';
 import ModalShell from './ModalShell';
 
 export default function AddBoardModal({ onClose }) {
   const dispatch = useDispatch();
+  const rootBoard = useSelector((state) => selectBoardById(state, 'root'));
   const [name, setName] = useState('');
 
   const handleConfirm = () => {
@@ -31,7 +32,48 @@ export default function AddBoardModal({ onClose }) {
       sounds: [],
     };
 
+    // Add a navigation button in the root board so the new page stays accessible
+    const navBtnId = `btn-${newId}`;
+    const navBtn = {
+      id: navBtnId,
+      label: trimmedName,
+      vocalization: trimmedName,
+      load_board: { id: newId },
+      background_color: 'rgb(240, 248, 255)',
+    };
+
+    const oldButtons = rootBoard?.buttons || [];
+    const oldOrder = rootBoard?.grid?.order || [];
+    const cols = rootBoard?.grid?.columns || 3;
+
+    // Find first null slot in last row, or append a new row
+    let newOrder;
+    const lastRow = oldOrder[oldOrder.length - 1] || [];
+    const nullIdx = lastRow.indexOf(null);
+    if (nullIdx !== -1) {
+      newOrder = oldOrder.map((row, i) =>
+        i === oldOrder.length - 1
+          ? row.map((cell, j) => (j === nullIdx ? navBtnId : cell))
+          : row
+      );
+    } else {
+      const newRow = Array(cols).fill(null);
+      newRow[0] = navBtnId;
+      newOrder = [...oldOrder, newRow];
+    }
+
+    const updatedRoot = {
+      ...rootBoard,
+      buttons: [...oldButtons, navBtn],
+      grid: {
+        ...rootBoard?.grid,
+        rows: newOrder.length,
+        order: newOrder,
+      },
+    };
+
     dispatch(addBoard(newBoard));
+    dispatch(updateBoard(updatedRoot));
     dispatch(navigateTo(newId));
     onClose();
   };
