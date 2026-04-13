@@ -6,19 +6,19 @@
 
 ## Requirements
 
-### Requirement: Edit button modal opens on ✎ click
+### Requirement: Edit button modal opens on button click
 
-When `isEditMode` is true, clicking the ✎ overlay on a Grid button SHALL open `EditButtonModal` pre-filled with the button's current `label` and `vocalization` values.
+When `isEditMode` is true, clicking anywhere on a Grid button SHALL open `EditButtonModal` pre-filled with the button's current `label` and `vocalization` values.
 
 #### Scenario: Modal opens with current values
 
-- **WHEN** user clicks the ✎ overlay on a button while in edit mode
+- **WHEN** user clicks anywhere on a Grid button while in edit mode
 - **THEN** EditButtonModal opens with `label` input showing the button's current label and `vocalization` input showing the button's current vocalization (or label if vocalization is absent)
 
 
 <!-- @trace
-source: caregiver-edit-mode
-updated: 2026-04-08
+source: edit-mode-button-opens-modal
+updated: 2026-04-13
 code:
   - src/features/board/GridView.css
   - src/utils/boardStorage.js
@@ -33,6 +33,8 @@ code:
   - src/features/caregiver/ModalShell.jsx
   - src/features/navigation/NavigationBar.jsx
   - src/utils/obfParser.js
+  - src/features/board/BoardButton.jsx
+  - src/features/board/BoardButton.css
 -->
 
 ---

@@ -37,3 +37,10 @@
 .button-label {
   font-size: clamp(1rem, 2.5vw, 1.6rem);
 }
+
+.button-edit-hint {
+  font-size: 0.7em;
+  opacity: 0.6;
+  margin-left: 2px;
+  pointer-events: none;
+}

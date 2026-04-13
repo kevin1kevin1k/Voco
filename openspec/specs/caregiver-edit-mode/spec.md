@@ -45,36 +45,63 @@ code:
 ---
 ### Requirement: Edit mode visual indicator on Grid buttons
 
-When `isEditMode` is true, each Grid button SHALL display a ✎ icon overlay in the top-right corner to signal editability.
+When `isEditMode` is true, each Grid button SHALL display a ✎ character inline, immediately to the right of the button label text, to signal editability. The ✎ SHALL NOT be rendered as a separate floating overlay element.
 
-#### Scenario: Edit overlay visible in edit mode
+#### Scenario: Edit indicator visible in edit mode
 
 - **WHEN** `isEditMode` is true and GridView renders buttons
-- **THEN** each button shows a ✎ overlay icon in the top-right corner
+- **THEN** each button shows a ✎ character immediately to the right of the label text, inside the button
 
-#### Scenario: Edit overlay hidden in normal mode
+#### Scenario: Edit indicator hidden in normal mode
 
 - **WHEN** `isEditMode` is false
-- **THEN** no ✎ overlay icon is shown on any button
+- **THEN** no ✎ character is shown on any button
 
 
 <!-- @trace
-source: caregiver-edit-mode
-updated: 2026-04-08
+source: edit-mode-button-opens-modal
+updated: 2026-04-13
 code:
-  - src/features/board/GridView.css
-  - src/utils/boardStorage.js
-  - src/features/navigation/NavigationBar.css
-  - src/features/caregiver/AddBoardModal.jsx
-  - src/features/caregiver/ModalShell.css
+  - src/features/board/BoardButton.jsx
+  - src/features/board/BoardButton.css
   - src/features/board/GridView.jsx
-  - src/features/caregiver/EditButtonModal.jsx
-  - src/app/store.js
-  - src/features/caregiver/AddButtonModal.jsx
-  - src/features/caregiver/EditBoardNameModal.jsx
-  - src/features/caregiver/ModalShell.jsx
-  - src/features/navigation/NavigationBar.jsx
-  - src/utils/obfParser.js
+  - src/features/board/GridView.css
+-->
+
+---
+### Requirement: Edit mode button click opens EditButtonModal
+
+When `isEditMode` is true, clicking anywhere on a Grid button SHALL open `EditButtonModal` pre-filled with the button's current values. Speech output and navigation SHALL NOT be triggered.
+
+#### Scenario: Button click opens modal in edit mode
+
+- **WHEN** `isEditMode` is true and user clicks anywhere on a Grid button
+- **THEN** `EditButtonModal` opens pre-filled with the button's current `label` and `vocalization`; no speech is synthesized and no navigation occurs
+
+#### Scenario: Button click normal behavior in non-edit mode
+
+- **WHEN** `isEditMode` is false and user clicks a Grid button
+- **THEN** normal speech/navigation behavior applies; no modal opens
+
+
+<!-- @trace
+source: edit-mode-button-opens-modal
+updated: 2026-04-13
+code:
+  - src/features/board/GridView.jsx
+  - src/features/board/BoardButton.jsx
+  - src/features/board/BoardButton.css
+-->
+
+
+<!-- @trace
+source: edit-mode-button-opens-modal
+updated: 2026-04-13
+code:
+  - src/features/board/BoardButton.jsx
+  - src/features/board/BoardButton.css
+  - src/features/board/GridView.jsx
+  - src/features/board/GridView.css
 -->
 
 ---

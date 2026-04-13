@@ -32,7 +32,9 @@ export default function GridView({ board }) {
   };
 
   const handleButtonClick = (button) => {
-    if (!isEditMode) {
+    if (isEditMode) {
+      setEditingButton(button);
+    } else {
       dispatch(recordClick({ buttonId: button.id, boardId: board.id }));
     }
   };
@@ -62,19 +64,7 @@ export default function GridView({ board }) {
               className="grid-cell-wrapper"
               onClick={() => handleButtonClick(button)}
             >
-              <BoardButton button={button} onNavigate={handleNavigate} isEditMode={isEditMode} />
-              {isEditMode && (
-                <button
-                  className="btn-edit-overlay"
-                  aria-label={`編輯 ${button.label}`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setEditingButton(button);
-                  }}
-                >
-                  ✎
-                </button>
-              )}
+              <BoardButton button={button} onNavigate={handleNavigate} isEditMode={isEditMode} onEdit={() => setEditingButton(button)} />
             </div>
           );
         })}
