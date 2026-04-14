@@ -8,24 +8,24 @@
 
 ### Requirement: Edit mode toggle in NavigationBar
 
-The NavigationBar SHALL display an "編輯" button on the right side when `isEditMode` is false. When `isEditMode` is true, the button SHALL change to "完成" and an additional "＋ 新增頁面" button SHALL appear.
+The NavigationBar SHALL display an "編輯" button on the right side when `isEditMode` is false. When `isEditMode` is true, the button SHALL change to "完成". The "＋ 新增頁面" button SHALL NOT appear in NavigationBar in edit mode; it is displayed in GridView instead.
 
 Dispatching `toggleEditMode` from `caregiverSlice` SHALL flip `isEditMode` between true and false.
 
 #### Scenario: Enter edit mode
 
 - **WHEN** user clicks "編輯" in NavigationBar
-- **THEN** `isEditMode` becomes true, "編輯" button changes to "完成", "＋ 新增頁面" button appears
+- **THEN** `isEditMode` becomes true, "編輯" button changes to "完成"; no "＋ 新增頁面" button appears in NavigationBar
 
 #### Scenario: Exit edit mode
 
 - **WHEN** user clicks "完成" in NavigationBar
-- **THEN** `isEditMode` becomes false, "完成" reverts to "編輯", "＋ 新增頁面" button disappears
+- **THEN** `isEditMode` becomes false, "完成" reverts to "編輯"
 
 
 <!-- @trace
-source: caregiver-edit-mode
-updated: 2026-04-08
+source: unify-edit-mode-add-actions
+updated: 2026-04-13
 code:
   - src/features/board/GridView.css
   - src/utils/boardStorage.js
@@ -107,33 +107,24 @@ code:
 ---
 ### Requirement: Add button cell in Grid edit mode
 
-When `isEditMode` is true, GridView SHALL render an extra cell after all existing buttons with the label "＋ 新增按鈕".
+When `isEditMode` is true, GridView SHALL render a bottom action bar containing two buttons side by side: "＋ 新增按鈕" and "＋ 新增頁面". When `isEditMode` is false, this action bar SHALL NOT be rendered.
 
-#### Scenario: Add button cell appears in edit mode
+#### Scenario: Add action bar appears in edit mode
 
-- **WHEN** `isEditMode` is true
-- **THEN** a "＋ 新增按鈕" cell appears after the last button in the Grid
+- **WHEN** `isEditMode` is true and GridView renders
+- **THEN** a bottom bar with "＋ 新增按鈕" and "＋ 新增頁面" buttons appears below the grid
 
-#### Scenario: Add button cell absent in normal mode
+#### Scenario: Add action bar absent in normal mode
 
 - **WHEN** `isEditMode` is false
-- **THEN** no "＋ 新增按鈕" cell is rendered
+- **THEN** no "＋ 新增按鈕" or "＋ 新增頁面" cell is rendered in GridView
 
 <!-- @trace
-source: caregiver-edit-mode
-updated: 2026-04-08
+source: unify-edit-mode-add-actions
+updated: 2026-04-14
 code:
   - src/features/board/GridView.css
-  - src/utils/boardStorage.js
   - src/features/navigation/NavigationBar.css
-  - src/features/caregiver/AddBoardModal.jsx
-  - src/features/caregiver/ModalShell.css
-  - src/features/board/GridView.jsx
-  - src/features/caregiver/EditButtonModal.jsx
-  - src/app/store.js
-  - src/features/caregiver/AddButtonModal.jsx
-  - src/features/caregiver/EditBoardNameModal.jsx
-  - src/features/caregiver/ModalShell.jsx
   - src/features/navigation/NavigationBar.jsx
-  - src/utils/obfParser.js
+  - src/features/board/GridView.jsx
 -->

@@ -8,6 +8,7 @@ import BoardButton from './BoardButton';
 import RecommendationBar from '../prediction/RecommendationBar';
 import EditButtonModal from '../caregiver/EditButtonModal';
 import AddButtonModal from '../caregiver/AddButtonModal';
+import AddBoardModal from '../caregiver/AddBoardModal';
 import './GridView.css';
 
 export default function GridView({ board }) {
@@ -17,6 +18,7 @@ export default function GridView({ board }) {
 
   const [editingButton, setEditingButton] = useState(null);
   const [showAddButtonModal, setShowAddButtonModal] = useState(false);
+  const [showAddBoardModal, setShowAddBoardModal] = useState(false);
 
   const buttons = parseButtons(board);
   const gridOrder = getGridOrder(board);
@@ -72,13 +74,22 @@ export default function GridView({ board }) {
       </div>
 
       {isEditMode && (
-        <button
-          className="grid-add-button"
-          onClick={() => setShowAddButtonModal(true)}
-          aria-label="新增按鈕"
-        >
-          ＋ 新增按鈕
-        </button>
+        <div className="grid-edit-actions">
+          <button
+            className="grid-add-button"
+            onClick={() => setShowAddButtonModal(true)}
+            aria-label="新增按鈕"
+          >
+            ＋ 新增按鈕
+          </button>
+          <button
+            className="grid-add-button"
+            onClick={() => setShowAddBoardModal(true)}
+            aria-label="新增頁面"
+          >
+            ＋ 新增頁面
+          </button>
+        </div>
       )}
 
       {editingButton && (
@@ -92,6 +103,11 @@ export default function GridView({ board }) {
         <AddButtonModal
           board={board}
           onClose={() => setShowAddButtonModal(false)}
+        />
+      )}
+      {showAddBoardModal && (
+        <AddBoardModal
+          onClose={() => setShowAddBoardModal(false)}
         />
       )}
     </div>

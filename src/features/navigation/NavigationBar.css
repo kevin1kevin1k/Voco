@@ -68,16 +68,6 @@
   align-items: center;
 }
 
-.nav-add-board {
-  background: #2a6099;
-  font-size: 1rem;
-  padding: 0.5rem 0.9rem;
-}
-
-.nav-add-board:hover {
-  background: #1e4d7a;
-}
-
 .nav-toggle-edit {
   font-size: 1rem;
   padding: 0.5rem 0.9rem;

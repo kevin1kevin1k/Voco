@@ -8,31 +8,22 @@
 
 ### Requirement: Add board modal opens from NavigationBar
 
-Clicking "＋ 新增頁面" in NavigationBar edit mode SHALL open `AddBoardModal` with an empty name field.
+Clicking "＋ 新增頁面" in GridView's bottom action bar while in edit mode SHALL open `AddBoardModal` with an empty name field. The "＋ 新增頁面" button SHALL NOT appear in NavigationBar.
 
 #### Scenario: Modal opens empty
 
-- **WHEN** user clicks "＋ 新增頁面" in NavigationBar while in edit mode
+- **WHEN** user clicks "＋ 新增頁面" in GridView's bottom action bar while in edit mode
 - **THEN** AddBoardModal opens with the board name field empty
 
 
 <!-- @trace
-source: caregiver-edit-mode
-updated: 2026-04-08
+source: unify-edit-mode-add-actions
+updated: 2026-04-14
 code:
   - src/features/board/GridView.css
-  - src/utils/boardStorage.js
   - src/features/navigation/NavigationBar.css
-  - src/features/caregiver/AddBoardModal.jsx
-  - src/features/caregiver/ModalShell.css
-  - src/features/board/GridView.jsx
-  - src/features/caregiver/EditButtonModal.jsx
-  - src/app/store.js
-  - src/features/caregiver/AddButtonModal.jsx
-  - src/features/caregiver/EditBoardNameModal.jsx
-  - src/features/caregiver/ModalShell.jsx
   - src/features/navigation/NavigationBar.jsx
-  - src/utils/obfParser.js
+  - src/features/board/GridView.jsx
 -->
 
 ---

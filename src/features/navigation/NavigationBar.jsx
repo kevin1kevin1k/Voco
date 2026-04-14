@@ -1,9 +1,8 @@
-import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { navigateTo, goBack, goHome, selectCurrentBoardId, selectCanGoBack } from './navigationSlice';
 import { selectBoardById } from '../board/boardSlice';
 import { selectIsEditMode, toggleEditMode } from '../caregiver/caregiverSlice';
-import AddBoardModal from '../caregiver/AddBoardModal';
+import { useState } from 'react';
 import EditBoardNameModal from '../caregiver/EditBoardNameModal';
 import './NavigationBar.css';
 
@@ -15,7 +14,6 @@ export default function NavigationBar() {
   const currentBoard = useSelector((state) => selectBoardById(state, currentBoardId));
   const isEditMode = useSelector(selectIsEditMode);
 
-  const [showAddBoardModal, setShowAddBoardModal] = useState(false);
   const [showEditBoardNameModal, setShowEditBoardNameModal] = useState(false);
 
   const isRoot = currentBoardId === 'root';
@@ -76,14 +74,6 @@ export default function NavigationBar() {
         </div>
 
         <div className="nav-edit-controls">
-          {isEditMode && (
-            <button
-              className="nav-btn nav-add-board"
-              onClick={() => setShowAddBoardModal(true)}
-            >
-              ＋ 新增頁面
-            </button>
-          )}
           <button
             className={`nav-btn nav-toggle-edit ${isEditMode ? 'nav-toggle-edit--active' : ''}`}
             onClick={() => dispatch(toggleEditMode())}
@@ -93,9 +83,6 @@ export default function NavigationBar() {
         </div>
       </nav>
 
-      {showAddBoardModal && (
-        <AddBoardModal onClose={() => setShowAddBoardModal(false)} />
-      )}
       {showEditBoardNameModal && currentBoard && (
         <EditBoardNameModal
           board={currentBoard}
