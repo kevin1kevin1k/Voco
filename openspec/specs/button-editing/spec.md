@@ -38,6 +38,30 @@ code:
 -->
 
 ---
+### Requirement: Delete button entry point in EditButtonModal
+
+`EditButtonModal` SHALL render a "刪除" button alongside the "取消" and "確認" buttons. The delete flow is governed by the `button-deletion` capability. The presence of this button is part of the button-editing modal's layout contract.
+
+#### Scenario: Delete button is present in EditButtonModal
+
+- **WHEN** EditButtonModal is open in edit mode
+- **THEN** a "刪除" button is visible in the modal's action row alongside "取消" and "確認"
+
+
+<!-- @trace
+source: add-delete-button-and-board
+updated: 2026-04-16
+code:
+  - src/features/navigation/NavigationBar.css
+  - src/features/navigation/NavigationBar.jsx
+  - src/features/caregiver/EditButtonModal.jsx
+  - src/features/caregiver/EditButtonModal.css
+  - src/app/store.js
+  - src/features/board/boardSlice.js
+  - src/features/caregiver/DeleteBoardModal.jsx
+-->
+
+---
 ### Requirement: Confirm button edit saves changes
 
 Confirming in EditButtonModal SHALL dispatch `updateBoard` with the board updated to reflect the new `label` and `vocalization` for the edited button. The modal SHALL close after dispatch.

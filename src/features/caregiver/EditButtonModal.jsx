@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { updateBoard } from '../board/boardSlice';
+import { updateBoard, deleteButton } from '../board/boardSlice';
 import ModalShell from './ModalShell';
+import './EditButtonModal.css';
 
 export default function EditButtonModal({ button, board, onClose }) {
   const dispatch = useDispatch();
   const [label, setLabel] = useState(button.label);
   const [vocalization, setVocalization] = useState(button.vocalization || button.label);
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
   const handleConfirm = () => {
     const updatedButtons = board.buttons.map((btn) =>
@@ -16,11 +18,25 @@ export default function EditButtonModal({ button, board, onClose }) {
     onClose();
   };
 
+  const handleDeleteClick = () => {
+    if (!confirmDelete) {
+      setConfirmDelete(true);
+    } else {
+      dispatch(deleteButton({ boardId: board.id, buttonId: button.id }));
+      onClose();
+    }
+  };
+
+  const handleClose = () => {
+    setConfirmDelete(false);
+    onClose();
+  };
+
   return (
     <ModalShell
       title="編輯按鈕"
       onConfirm={handleConfirm}
-      onClose={onClose}
+      onClose={handleClose}
       confirmDisabled={label.trim() === ''}
     >
       <div className="modal-field">
@@ -41,6 +57,11 @@ export default function EditButtonModal({ button, board, onClose }) {
           value={vocalization}
           onChange={(e) => setVocalization(e.target.value)}
         />
+      </div>
+      <div className="edit-btn-delete-row">
+        <button className={`btn-delete${confirmDelete ? ' btn-delete--confirm' : ''}`} onClick={handleDeleteClick}>
+          {confirmDelete ? '確認刪除？' : '刪除'}
+        </button>
       </div>
     </ModalShell>
   );

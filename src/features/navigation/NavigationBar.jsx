@@ -4,6 +4,7 @@ import { selectBoardById } from '../board/boardSlice';
 import { selectIsEditMode, toggleEditMode } from '../caregiver/caregiverSlice';
 import { useState } from 'react';
 import EditBoardNameModal from '../caregiver/EditBoardNameModal';
+import DeleteBoardModal from '../caregiver/DeleteBoardModal';
 import './NavigationBar.css';
 
 export default function NavigationBar() {
@@ -15,6 +16,7 @@ export default function NavigationBar() {
   const isEditMode = useSelector(selectIsEditMode);
 
   const [showEditBoardNameModal, setShowEditBoardNameModal] = useState(false);
+  const [showDeleteBoardModal, setShowDeleteBoardModal] = useState(false);
 
   const isRoot = currentBoardId === 'root';
 
@@ -74,6 +76,14 @@ export default function NavigationBar() {
         </div>
 
         <div className="nav-edit-controls">
+          {isEditMode && !isRoot && (
+            <button
+              className="nav-btn nav-delete-board"
+              onClick={() => setShowDeleteBoardModal(true)}
+            >
+              刪除頁面
+            </button>
+          )}
           <button
             className={`nav-btn nav-toggle-edit ${isEditMode ? 'nav-toggle-edit--active' : ''}`}
             onClick={() => dispatch(toggleEditMode())}
@@ -87,6 +97,12 @@ export default function NavigationBar() {
         <EditBoardNameModal
           board={currentBoard}
           onClose={() => setShowEditBoardNameModal(false)}
+        />
+      )}
+      {showDeleteBoardModal && currentBoard && (
+        <DeleteBoardModal
+          board={currentBoard}
+          onClose={() => setShowDeleteBoardModal(false)}
         />
       )}
     </>

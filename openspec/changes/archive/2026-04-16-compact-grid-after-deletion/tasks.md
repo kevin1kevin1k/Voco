@@ -1,0 +1,7 @@
+## 1. boardSlice — compact grid after deleteButton
+
+- [x] 1.1 In `src/features/board/boardSlice.js`, update the `deleteButton` reducer: after setting the deleted button's grid cell(s) to `null`, add a compaction step. Flatten `board.grid.order` into a 1D array with `.flat()`, filter out all `null` values, then rebuild a `rows × columns` 2D array by slicing the flat list into rows of `board.grid.columns` length and padding the final row with `null` to maintain the fixed grid dimensions. `board.grid.rows` and `board.grid.columns` SHALL NOT be modified. This satisfies "deleteButton reducer removes button from board" (Grid stays same dimensions after compaction, Button removed and grid compacted).
+
+## 2. DeleteBoardModal — remove orphan nav buttons before board deletion
+
+- [x] 2.1 In `src/features/caregiver/DeleteBoardModal.jsx`, update `handleConfirm`: import `useSelector` and `selectAllBoardIds` and `selectBoardById` (or access state via a combined selector). Before dispatching `deleteBoard(board.id)`, use `useSelector` to get all boards from `state.boards.byId`, iterate over every board's `buttons` array, find buttons where `btn.load_board?.id === board.id`, and dispatch `deleteButton({ boardId: parentBoardId, buttonId: btn.id })` for each. Then dispatch `deleteBoard(board.id)` and `goHome()`. This satisfies "DeleteBoardModal confirms and executes board deletion" (Confirm removes nav button, compacts parent, deletes board, navigates home).

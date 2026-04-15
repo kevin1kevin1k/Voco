@@ -81,6 +81,16 @@
   background: #c73350;
 }
 
+.nav-delete-board {
+  background: #c0392b;
+  font-size: 1rem;
+  padding: 0.5rem 0.9rem;
+}
+
+.nav-delete-board:hover {
+  background: #a93226;
+}
+
 .nav-category {
   padding: 0.6rem 1.2rem;
   border: 2px solid transparent;

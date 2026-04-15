@@ -1,6 +1,6 @@
 import { configureStore, createListenerMiddleware } from '@reduxjs/toolkit';
 import navigationReducer from '../features/navigation/navigationSlice';
-import boardReducer, { addBoard, updateBoard } from '../features/board/boardSlice';
+import boardReducer, { addBoard, updateBoard, deleteButton, deleteBoard } from '../features/board/boardSlice';
 import speechReducer from '../features/speech/speechSlice';
 import predictionReducer from '../features/prediction/predictionSlice';
 import caregiverReducer from '../features/caregiver/caregiverSlice';
@@ -17,6 +17,18 @@ listenerMiddleware.startListening({
 });
 listenerMiddleware.startListening({
   actionCreator: updateBoard,
+  effect: (_, listenerApi) => {
+    saveBoardsToStorage(listenerApi.getState().boards);
+  },
+});
+listenerMiddleware.startListening({
+  actionCreator: deleteButton,
+  effect: (_, listenerApi) => {
+    saveBoardsToStorage(listenerApi.getState().boards);
+  },
+});
+listenerMiddleware.startListening({
+  actionCreator: deleteBoard,
   effect: (_, listenerApi) => {
     saveBoardsToStorage(listenerApi.getState().boards);
   },

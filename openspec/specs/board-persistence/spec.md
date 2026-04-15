@@ -8,7 +8,7 @@
 
 ### Requirement: Persist user-edited boards to localStorage
 
-The system SHALL write the current boards state to localStorage under the key `voco_boards` after every `addBoard` or `updateBoard` Redux action. The stored value SHALL be JSON-serialized `{ byId: {...}, allIds: [...] }` containing only the boards that were added or modified by the user (not the original static boards).
+The system SHALL write the current boards state to localStorage under the key `voco_boards` after every `addBoard`, `updateBoard`, or `deleteBoard` Redux action. The stored value SHALL be JSON-serialized `{ byId: {...}, allIds: [...] }` reflecting the full current boards state after the action.
 
 #### Scenario: Board saved after update
 
@@ -20,24 +20,23 @@ The system SHALL write the current boards state to localStorage under the key `v
 - **WHEN** `addBoard` is dispatched with a new board object
 - **THEN** localStorage `voco_boards` is updated to include the new board
 
+#### Scenario: Board removed from localStorage after deletion
+
+- **WHEN** `deleteBoard` is dispatched with a board ID
+- **THEN** localStorage `voco_boards` is updated to exclude the deleted board from both `byId` and `allIds`
+
 
 <!-- @trace
-source: caregiver-edit-mode
-updated: 2026-04-08
+source: add-delete-button-and-board
+updated: 2026-04-16
 code:
-  - src/features/board/GridView.css
-  - src/utils/boardStorage.js
   - src/features/navigation/NavigationBar.css
-  - src/features/caregiver/AddBoardModal.jsx
-  - src/features/caregiver/ModalShell.css
-  - src/features/board/GridView.jsx
-  - src/features/caregiver/EditButtonModal.jsx
-  - src/app/store.js
-  - src/features/caregiver/AddButtonModal.jsx
-  - src/features/caregiver/EditBoardNameModal.jsx
-  - src/features/caregiver/ModalShell.jsx
   - src/features/navigation/NavigationBar.jsx
-  - src/utils/obfParser.js
+  - src/features/caregiver/EditButtonModal.jsx
+  - src/features/caregiver/EditButtonModal.css
+  - src/app/store.js
+  - src/features/board/boardSlice.js
+  - src/features/caregiver/DeleteBoardModal.jsx
 -->
 
 ---
