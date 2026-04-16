@@ -2,8 +2,8 @@ import './ModalShell.css';
 
 export default function ModalShell({ title, children, onConfirm, onClose, confirmDisabled }) {
   return (
-    <div className="modal-overlay" role="dialog" aria-modal="true" aria-label={title}>
-      <div className="modal-card">
+    <div className="modal-overlay" role="dialog" aria-modal="true" aria-label={title} onClick={onClose}>
+      <div className="modal-card" onClick={(e) => e.stopPropagation()}>
         <h2 className="modal-title">{title}</h2>
         <div className="modal-body">{children}</div>
         <div className="modal-actions">
