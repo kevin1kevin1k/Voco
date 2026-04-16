@@ -63,8 +63,8 @@
   "images": [
     {
       "id": "img-living-room",
-      "url": "/images/scenes/living-room.jpg",
-      "content_type": "image/jpeg"
+      "url": "/images/scenes/living-room.svg",
+      "content_type": "image/svg+xml"
     }
   ],
   "sounds": []

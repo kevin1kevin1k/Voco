@@ -1,30 +1,63 @@
 .hotspot {
   position: absolute;
-  background: rgba(233, 69, 96, 0.15);
-  border: 2px solid rgba(233, 69, 96, 0.5);
-  border-radius: 8px;
+  background: rgba(219, 86, 61, 0.16);
+  border: 2px solid rgba(141, 38, 18, 0.42);
+  border-radius: 12px;
   cursor: pointer;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  padding: 4px;
-  transition: background 0.2s, border-color 0.2s;
+  padding: 6px;
+  outline: none;
+  box-shadow: 0 8px 18px rgba(36, 25, 20, 0.08);
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.2s;
 }
 
 .hotspot:hover {
-  background: rgba(233, 69, 96, 0.35);
-  border-color: rgba(233, 69, 96, 0.9);
+  background: rgba(219, 86, 61, 0.28);
+  border-color: rgba(141, 38, 18, 0.8);
+  box-shadow: 0 10px 22px rgba(36, 25, 20, 0.16);
+}
+
+.hotspot:focus-visible {
+  background: rgba(219, 86, 61, 0.36);
+  border-color: rgba(72, 113, 199, 0.95);
+  box-shadow: 0 0 0 4px rgba(234, 242, 255, 0.95), 0 0 0 8px rgba(72, 113, 199, 0.45);
+  transform: translateY(-1px);
 }
 
 .hotspot:active {
-  background: rgba(233, 69, 96, 0.5);
+  background: rgba(219, 86, 61, 0.48);
+  box-shadow: 0 5px 12px rgba(36, 25, 20, 0.2);
+  transform: translateY(0);
 }
 
 .hotspot-label {
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(22, 27, 37, 0.84);
   color: #fff;
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-size: 0.85rem;
-  white-space: nowrap;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  line-height: 1.2;
+  white-space: normal;
+  text-align: center;
+  max-width: min(100%, 10rem);
+}
+
+.hotspot:hover .hotspot-label,
+.hotspot:focus-visible .hotspot-label {
+  background: rgba(12, 15, 20, 0.92);
+}
+
+@media (max-width: 768px) {
+  .hotspot {
+    padding: 4px;
+    border-radius: 10px;
+  }
+
+  .hotspot-label {
+    font-size: 0.76rem;
+    padding: 3px 8px;
+    max-width: 7rem;
+  }
 }

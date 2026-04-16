@@ -130,21 +130,19 @@ Voco 是一款為高認知能力、具表達性失語症（Broca's Aphasia）的
 ## 目前專案現況
 ### 已存在的原型能力
 - 已有 React + Redux Toolkit 專案基底。
-- 已有 `root`、`home`、`family` OBF 板面資料。
+- 已有 `root`、`home`、`family`、`medical`、`places` OBF 板面資料。
 - 已有 `BoardRenderer`，可依 `ext_voco_display_type` 在 `Grid` 與 `VSD` 間切換。
 - 已有階層式導航 slice。
 - 已有 Web Speech API hook 與語音設定 slice。
 - 已有推薦 slice 與點擊紀錄基礎。
 - 已設定 PWA build，可產出 service worker。
+- 已補上基線 PWA icon 與住家 mock VSD 場景資產。
 
 ### 已知落差
-- 首頁已有 `medical`、`places` 入口，但對應 board 檔尚未存在。
-- `public/manifest.json` 指向的安裝 icon 尚未補齊。
-- `home` 板面背景圖路徑已定義，但實際檔案尚未存在。
 - README 仍是預設 Vite 內容。
-- 尚無正式 PRD、TODO、測試規格與驗證流程。
 - 推薦邏輯目前偏簡化，尚未充分反映語意關聯。
-- Caregiver Mode 目前僅有狀態雛形，尚無實際操作介面。
+- Caregiver Mode 已有編輯雛形，但資訊架構與正式操作流程仍未定案。
+- 尚未建立正式測試規格、自動化驗證流程與 README 專案化說明。
 
 ## User Mode MVP 驗收標準
 1. 使用者可從首頁穩定進入現有板面，且導航不會出現死路。

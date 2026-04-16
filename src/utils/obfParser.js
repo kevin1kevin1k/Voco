@@ -65,9 +65,26 @@ export function getGridOrder(board) {
 
 import { readBoardsFromStorage } from './boardStorage.js';
 
+function mergeStoredBoard(staticBoard, storedBoard) {
+  if (!staticBoard) return storedBoard;
+  if (!storedBoard) return staticBoard;
+
+  return {
+    ...staticBoard,
+    ...storedBoard,
+    id: staticBoard.id,
+    format: staticBoard.format,
+    locale: staticBoard.locale,
+    ext_voco_display_type: staticBoard.ext_voco_display_type,
+    ext_voco_background: staticBoard.ext_voco_background,
+    images: staticBoard.images,
+  };
+}
+
 /**
  * 載入所有板面資料，合併靜態 JSON 與 localStorage 用戶修改
- * localStorage 中的板面優先覆蓋同 ID 的靜態板面
+ * 內建板面以 repo 版本的 schema / 資產為準，使用者可編輯內容再以 localStorage 覆蓋
+ * 不存在於靜態 JSON 的板面則視為使用者自訂板面，直接沿用 localStorage
  * @returns {Promise<object>} { byId, allIds }
  */
 export async function loadAllBoards() {
@@ -82,11 +99,13 @@ export async function loadAllBoards() {
     allIds.push(board.id);
   }
 
-  // Merge user-modified boards from localStorage (localStorage wins on same ID)
+  // Merge user-modified boards from localStorage.
   const stored = readBoardsFromStorage();
   if (stored && stored.byId) {
     for (const [boardId, board] of Object.entries(stored.byId)) {
-      byId[boardId] = board;
+      byId[boardId] = byId[boardId]
+        ? mergeStoredBoard(byId[boardId], board)
+        : board;
       if (!allIds.includes(boardId)) {
         allIds.push(boardId);
       }

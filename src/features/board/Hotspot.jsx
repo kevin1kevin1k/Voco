@@ -11,6 +11,7 @@ export default function Hotspot({ hotspot }) {
 
   return (
     <button
+      type="button"
       className="hotspot"
       style={{
         left: `${hotspot.x}%`,
@@ -19,7 +20,7 @@ export default function Hotspot({ hotspot }) {
         height: `${hotspot.height}%`,
       }}
       onClick={handleClick}
-      aria-label={hotspot.label}
+      aria-label={hotspot.vocalization || hotspot.label}
       title={hotspot.label}
     >
       <span className="hotspot-label">{hotspot.label}</span>

@@ -17,13 +17,13 @@
   依賴關係：無。
   建議產出物：更新後的 `README.md`、`docs/PRD.md`、`docs/TODO.md`。
 
-- [ ] 補齊 PWA 與場景資產
+- [x] 補齊 PWA 與場景資產
   目的：讓安裝流程與 VSD 場景能在真實裝置上正常展示，不再依賴 placeholder。
   完成條件：
-  - [ ] 補上 `public/icons/icon-192.png`
-  - [ ] 補上 `public/icons/icon-512.png`
-  - [ ] 補上 `public/images/scenes/living-room.jpg`，或明確改成存在的 mock 圖檔
-  - [ ] `manifest.json`、實際檔案與 build 輸出相互一致
+  - [x] 補上 `public/icons/icon-192.png`
+  - [x] 補上 `public/icons/icon-512.png`
+  - [x] 補上 `public/images/scenes/living-room.jpg`，或明確改成存在的 mock 圖檔（以 `living-room.png` 補 mock scene）
+  - [x] `manifest.json`、實際檔案與 build 輸出相互一致
   依賴關係：無。
   建議產出物：PWA icon、場景圖、必要的資產命名規範。
 
@@ -48,13 +48,13 @@
   依賴關係：首頁入口與板面資料需先一致。
   建議產出物：更新後的導航 UI 與 reducer 行為驗證。
 
-- [ ] 完成 VSD 操作品質
+- [x] 完成 VSD 操作品質
   目的：讓住家場景具備可實際使用的可點擊性、可辨識性與無障礙品質。
   完成條件：
-  - [ ] 場景背景圖在常見平板與手機尺寸下不變形
-  - [ ] 熱點具備可見 focus 樣式與鍵盤可操作性
-  - [ ] 熱點 hover / focus / active 狀態能讓照護者與使用者理解可點擊區域
-  - [ ] 沒有背景圖時的 placeholder 提示清楚且不破版
+  - [x] 場景背景圖在常見平板與手機尺寸下不變形
+  - [x] 熱點具備可見 focus 樣式與鍵盤可操作性
+  - [x] 熱點 hover / focus / active 狀態能讓照護者與使用者理解可點擊區域
+  - [x] 沒有背景圖時的 placeholder 提示清楚且不破版
   依賴關係：場景圖資產已補齊或 mock 資產已確定。
   建議產出物：更新後的 `VSDView`、`Hotspot` 與對應樣式。
 

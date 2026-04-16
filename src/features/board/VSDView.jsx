@@ -1,8 +1,10 @@
+import { useEffect, useState } from 'react';
 import { parseHotspot } from '../../utils/obfParser';
 import Hotspot from './Hotspot';
 import './VSDView.css';
 
 export default function VSDView({ board }) {
+  const [imageLoadFailed, setImageLoadFailed] = useState(false);
   const background = board.ext_voco_background;
   const backgroundImage = board.images?.find((img) => img.id === background?.image_id);
 
@@ -10,14 +12,21 @@ export default function VSDView({ board }) {
     .map(parseHotspot)
     .filter(Boolean);
 
+  useEffect(() => {
+    setImageLoadFailed(false);
+  }, [backgroundImage?.url, board.id]);
+
+  const canRenderBackground = Boolean(backgroundImage?.url) && !imageLoadFailed;
+
   return (
     <div className="vsd-view">
       <div className="vsd-container" role="img" aria-label={`${board.name} 場景`}>
-        {backgroundImage?.url ? (
+        {canRenderBackground ? (
           <img
             className="vsd-background"
             src={backgroundImage.url}
             alt={board.name}
+            onError={() => setImageLoadFailed(true)}
           />
         ) : (
           <div className="vsd-placeholder">
