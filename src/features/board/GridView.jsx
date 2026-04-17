@@ -46,7 +46,14 @@ export default function GridView({ board }) {
 
   return (
     <div className="grid-view">
-      <RecommendationBar board={board} recommendations={recommendations} />
+      <RecommendationBar
+        board={board}
+        recommendations={recommendations}
+        isEditMode={isEditMode}
+        onRecommendSelect={(button) =>
+          dispatch(recordClick({ buttonId: button.id, boardId: board.id }))
+        }
+      />
       <div
         className="grid-container"
         style={{

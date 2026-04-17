@@ -9,37 +9,43 @@
       "id": "btn-hospital",
       "label": "醫院",
       "vocalization": "我要去醫院",
-      "background_color": "rgb(200, 230, 201)"
+      "background_color": "rgb(200, 230, 201)",
+      "ext_voco_related_button_ids": ["btn-bank", "btn-go-home", "btn-restaurant"]
     },
     {
       "id": "btn-supermarket",
       "label": "超市",
       "vocalization": "我要去超市",
-      "background_color": "rgb(200, 230, 201)"
+      "background_color": "rgb(200, 230, 201)",
+      "ext_voco_related_button_ids": ["btn-restaurant", "btn-bank", "btn-go-home"]
     },
     {
       "id": "btn-park",
       "label": "公園",
       "vocalization": "我要去公園",
-      "background_color": "rgb(200, 230, 201)"
+      "background_color": "rgb(200, 230, 201)",
+      "ext_voco_related_button_ids": ["btn-restaurant", "btn-go-home", "btn-supermarket"]
     },
     {
       "id": "btn-restaurant",
       "label": "餐廳",
       "vocalization": "我要去餐廳",
-      "background_color": "rgb(200, 230, 201)"
+      "background_color": "rgb(200, 230, 201)",
+      "ext_voco_related_button_ids": ["btn-supermarket", "btn-park", "btn-go-home"]
     },
     {
       "id": "btn-bank",
       "label": "銀行",
       "vocalization": "我要去銀行",
-      "background_color": "rgb(200, 230, 201)"
+      "background_color": "rgb(200, 230, 201)",
+      "ext_voco_related_button_ids": ["btn-hospital", "btn-supermarket", "btn-go-home"]
     },
     {
       "id": "btn-go-home",
       "label": "回家",
       "vocalization": "我要回家",
-      "background_color": "rgb(200, 230, 201)"
+      "background_color": "rgb(200, 230, 201)",
+      "ext_voco_related_button_ids": ["btn-restaurant", "btn-bank", "btn-park", "btn-hospital"]
     }
   ],
   "grid": {

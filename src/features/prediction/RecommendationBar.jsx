@@ -1,10 +1,10 @@
 import { useSpeech } from '../speech/useSpeech';
 import './RecommendationBar.css';
 
-export default function RecommendationBar({ board, recommendations }) {
+export default function RecommendationBar({ board, recommendations, isEditMode, onRecommendSelect }) {
   const { speak } = useSpeech();
 
-  if (!recommendations || recommendations.length === 0) return null;
+  if (isEditMode || !recommendations || recommendations.length === 0) return null;
 
   const buttonMap = {};
   for (const btn of board.buttons || []) {
@@ -24,7 +24,10 @@ export default function RecommendationBar({ board, recommendations }) {
         <button
           key={btn.id}
           className="recommendation-btn"
-          onClick={() => speak(btn.vocalization || btn.label)}
+          onClick={() => {
+            onRecommendSelect?.(btn);
+            speak(btn.vocalization || btn.label);
+          }}
           aria-label={`推薦：${btn.label}`}
         >
           {btn.label}
