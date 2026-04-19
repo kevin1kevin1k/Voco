@@ -8,6 +8,7 @@ export default function AddBoardModal({ onClose }) {
   const dispatch = useDispatch();
   const rootBoard = useSelector((state) => selectBoardById(state, 'root'));
   const [name, setName] = useState('');
+  const [displayType, setDisplayType] = useState('grid');
 
   const handleConfirm = () => {
     const trimmedName = name.trim();
@@ -18,19 +19,24 @@ export default function AddBoardModal({ onClose }) {
       id: newId,
       locale: 'zh-TW',
       name: trimmedName,
-      ext_voco_display_type: 'grid',
+      ext_voco_display_type: displayType,
       buttons: [],
-      grid: {
+      images: [],
+      sounds: [],
+    };
+
+    if (displayType === 'grid') {
+      newBoard.grid = {
         rows: 2,
         columns: 3,
         order: [
           [null, null, null],
           [null, null, null],
         ],
-      },
-      images: [],
-      sounds: [],
-    };
+      };
+    } else {
+      newBoard.ext_voco_background = null;
+    }
 
     // Add a navigation button in the root board so the new page stays accessible
     const navBtnId = `btn-${newId}`;
@@ -94,6 +100,17 @@ export default function AddBoardModal({ onClose }) {
           onChange={(e) => setName(e.target.value)}
           autoFocus
         />
+      </div>
+      <div className="modal-field">
+        <label htmlFor="add-board-display-type">版面類型</label>
+        <select
+          id="add-board-display-type"
+          value={displayType}
+          onChange={(e) => setDisplayType(e.target.value)}
+        >
+          <option value="grid">Grid</option>
+          <option value="vsd">VSD</option>
+        </select>
       </div>
     </ModalShell>
   );

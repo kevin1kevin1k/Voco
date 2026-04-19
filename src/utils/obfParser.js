@@ -69,6 +69,8 @@ function mergeStoredBoard(staticBoard, storedBoard) {
   if (!staticBoard) return storedBoard;
   if (!storedBoard) return staticBoard;
 
+  const allowStoredVsdAssets = storedBoard.ext_voco_user_owned_vsd === true;
+
   return {
     ...staticBoard,
     ...storedBoard,
@@ -76,8 +78,12 @@ function mergeStoredBoard(staticBoard, storedBoard) {
     format: staticBoard.format,
     locale: staticBoard.locale,
     ext_voco_display_type: staticBoard.ext_voco_display_type,
-    ext_voco_background: staticBoard.ext_voco_background,
-    images: staticBoard.images,
+    ext_voco_background: allowStoredVsdAssets
+      ? storedBoard.ext_voco_background ?? staticBoard.ext_voco_background
+      : staticBoard.ext_voco_background,
+    images: allowStoredVsdAssets
+      ? storedBoard.images ?? staticBoard.images
+      : staticBoard.images,
   };
 }
 

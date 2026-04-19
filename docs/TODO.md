@@ -110,6 +110,16 @@
 
 ## Phase 3：Caregiver Mode 預留
 
+- [x] 交付本地 VSD 編輯器
+  目的：讓照護者不必修改 JSON，就能在目前裝置上建立與維護 VSD 場景。
+  完成條件：
+  - [x] 可新增 `VSD` 頁面，不限於編輯既有內建場景
+  - [x] 可上傳或替換照片/格局圖作為背景圖
+  - [x] 可手動建立、拖拉、縮放、編輯與刪除矩形區域
+  - [x] 背景圖 blob 與 board metadata 分開儲存，重新整理後仍可載入
+  依賴關係：既有 edit mode、board persistence 與 VSD renderer 已存在。
+  建議產出物：本地 VSD 編輯流程、IndexedDB 資產儲存、更新後的 caregiver UI。
+
 - [ ] 整理使用紀錄的單一資料來源
   目的：避免 `clickHistory` 與 `usageLogs` 長期各自演化，造成後續分析成本升高。
   完成條件：

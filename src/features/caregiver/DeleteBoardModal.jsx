@@ -2,12 +2,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteBoard, deleteButton } from '../board/boardSlice';
 import { goHome } from '../navigation/navigationSlice';
 import ModalShell from './ModalShell';
+import { deleteBoardImageAssets } from '../../utils/boardStorage';
 
 export default function DeleteBoardModal({ board, onClose }) {
   const dispatch = useDispatch();
   const allBoards = useSelector((state) => state.boards.byId);
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
     Object.entries(allBoards).forEach(([parentBoardId, parentBoard]) => {
       parentBoard.buttons?.forEach((btn) => {
         if (btn.load_board?.id === board.id) {
@@ -15,6 +16,7 @@ export default function DeleteBoardModal({ board, onClose }) {
         }
       });
     });
+    await deleteBoardImageAssets(board);
     dispatch(deleteBoard(board.id));
     dispatch(goHome());
     onClose();

@@ -53,7 +53,21 @@
   transition: border-color 0.15s;
 }
 
+.modal-field select {
+  padding: 0.7rem 0.9rem;
+  font-size: 1.05rem;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  background: #fff;
+  transition: border-color 0.15s;
+}
+
 .modal-field input:focus {
+  border-color: #1a1a2e;
+}
+
+.modal-field select:focus {
   border-color: #1a1a2e;
 }
 
