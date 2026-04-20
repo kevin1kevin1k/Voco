@@ -78,13 +78,13 @@
   依賴關係：點擊紀錄資料格式已固定。
   建議產出物：更新後的 prediction slice、selector 或純函式規格。
 
-- [ ] 統整語音輸出與 fallback 行為
+- [x] 統整語音輸出與 fallback 行為
   目的：降低不同裝置下的語音不一致問題。
   完成條件：
-  - [ ] 語音輸出優先選擇 `zh-TW`
-  - [ ] 若沒有 `zh-TW` voice，需有次佳 fallback 邏輯與錯誤處理
-  - [ ] 連續點擊時的 cancel / replay 行為明確且可預期
-  - [ ] 相關設定集中管理，不散落在元件內
+  - [x] 語音輸出優先選擇 `zh-TW`
+  - [x] 若沒有 `zh-TW` voice，需有次佳 fallback 邏輯與錯誤處理
+  - [x] 連續點擊時的 cancel / replay 行為明確且可預期
+  - [x] 相關設定集中管理，不散落在元件內
   依賴關係：現有 speech slice 與 hook。
   建議產出物：更新後的 speech hook、設定文件或註解。
 

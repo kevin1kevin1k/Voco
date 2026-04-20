@@ -73,7 +73,9 @@ Voco 是一款為高認知能力、具表達性失語症（Broca's Aphasia）的
 ### 3. 語音輸出
 - 使用 `window.speechSynthesis`。
 - 預設語系為 `zh-TW`。
-- 優先選擇 `zh-TW` voice；若裝置無可用 voice，需有清楚 fallback 行為。
+- 語音 fallback 順序需固定為：精確 `zh-TW` → 繁中/台灣中文 voice（如 `zh-Hant`、`zh-HK`）→ 任一 `zh-*` voice → 瀏覽器預設 voice。
+- 初次載入若 voice 清單尚未就緒，系統需先保留最後一次發聲請求；若短時間內仍無可用 voice，也必須退回瀏覽器預設行為，不可靜默失敗。
+- 連續點擊不同詞彙時，需以最後一次意圖為準，先取消前一次發聲再播放新內容。
 - 發聲內容優先使用 `vocalization`，沒有則退回 `label`。
 
 ### 4. 輕量推薦
@@ -151,7 +153,7 @@ Voco 是一款為高認知能力、具表達性失語症（Broca's Aphasia）的
 
 ### 已知落差
 - README 仍是預設 Vite 內容。
-- Grid 視覺與語音 fallback 仍需進一步統整。
+- Grid 視覺仍需進一步統整。
 - Caregiver Mode 目前僅支援本地離線 VSD 編輯，尚未提供雲端同步、AI 建置精靈與草稿/發布流程。
 - VSD 區域目前只支援矩形，不支援多邊形或自由形狀。
 - 尚未建立正式測試規格、自動化驗證流程與 README 專案化說明。
