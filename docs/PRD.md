@@ -147,6 +147,7 @@ Voco 是一款為高認知能力、具表達性失語症（Broca's Aphasia）的
 - 已有階層式導航 slice。
 - 已有 Web Speech API hook 與語音設定 slice。
 - 已有推薦 slice 與點擊紀錄基礎。
+- 已有以 `node:test` 建立的核心邏輯測試基線，覆蓋 `obfParser`、navigation reducer、prediction logic 與 speech helper。
 - 已設定 PWA build，可產出 service worker。
 - 已補上基線 PWA icon 與住家 mock VSD 場景資產。
 - 已有首版 Caregiver VSD 編輯能力，可本地建立 VSD 頁面、上傳背景圖、建立與編輯矩形區域。
@@ -155,7 +156,7 @@ Voco 是一款為高認知能力、具表達性失語症（Broca's Aphasia）的
 - README 仍是預設 Vite 內容。
 - Caregiver Mode 目前僅支援本地離線 VSD 編輯，尚未提供雲端同步、AI 建置精靈與草稿/發布流程。
 - VSD 區域目前只支援矩形，不支援多邊形或自由形狀。
-- 尚未建立正式測試規格、自動化驗證流程與 README 專案化說明。
+- 尚未建立完整的互動 / PWA 驗證流程與 README 專案化說明。
 
 ## User Mode MVP 驗收標準
 1. 使用者可從首頁穩定進入現有板面，且導航不會出現死路。

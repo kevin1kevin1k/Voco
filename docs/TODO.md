@@ -90,12 +90,12 @@
 
 ## Phase 2：品質與驗證
 
-- [ ] 建立測試基線
+- [x] 建立測試基線
   目的：保護 OBF parsing、導航與推薦等核心邏輯，避免 UI 調整時回歸。
   完成條件：
-  - [ ] 加入單元測試工具鏈
-  - [ ] 至少覆蓋 `obfParser`、navigation reducer、prediction logic
-  - [ ] 關鍵純函式與 selector 具備可重現測試案例
+  - [x] 加入單元測試工具鏈
+  - [x] 至少覆蓋 `obfParser`、navigation reducer、prediction logic
+  - [x] 關鍵純函式與 selector 具備可重現測試案例
   依賴關係：推薦與導航行為已穩定。
   建議產出物：測試框架設定與初始測試檔。
 
