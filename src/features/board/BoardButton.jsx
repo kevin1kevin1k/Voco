@@ -20,9 +20,6 @@ export default function BoardButton({ button, onNavigate, isEditMode, onEdit }) 
   return (
     <button
       className="board-button"
-      style={{
-        backgroundColor: button.background_color || '#f0f0f0',
-      }}
       onClick={handleClick}
       aria-label={button.vocalization || button.label}
     >

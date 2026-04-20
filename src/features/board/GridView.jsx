@@ -43,9 +43,13 @@ export default function GridView({ board }) {
 
   const rows = board.grid?.rows || 1;
   const columns = board.grid?.columns || 1;
+  const boardTheme = ['family', 'medical', 'places'].includes(board.id) ? board.id : 'default';
 
   return (
-    <div className="grid-view">
+    <div
+      className={`grid-view ${isEditMode ? 'grid-view--edit-mode' : ''}`}
+      data-board-theme={boardTheme}
+    >
       <RecommendationBar
         board={board}
         recommendations={recommendations}
@@ -54,30 +58,36 @@ export default function GridView({ board }) {
           dispatch(recordClick({ buttonId: button.id, boardId: board.id }))
         }
       />
-      <div
-        className="grid-container"
-        style={{
-          gridTemplateRows: `repeat(${rows}, 1fr)`,
-          gridTemplateColumns: `repeat(${columns}, 1fr)`,
-        }}
-        role="grid"
-        aria-label={`${board.name} 按鈕網格`}
-      >
-        {gridOrder.flat().map((btnId, idx) => {
-          const button = buttonMap[btnId];
-          if (!button) return <div key={btnId ?? `empty-${idx}`} className="grid-empty" />;
-          return (
-            <div
-              key={btnId}
-              role="gridcell"
-              className="grid-cell-wrapper"
-              onClick={() => handleButtonClick(button)}
-            >
-              <BoardButton button={button} onNavigate={handleNavigate} isEditMode={isEditMode} onEdit={() => setEditingButton(button)} />
-            </div>
-          );
-        })}
-
+      <div className="grid-surface">
+        <div
+          className="grid-container"
+          style={{
+            gridTemplateRows: `repeat(${rows}, 1fr)`,
+            gridTemplateColumns: `repeat(${columns}, 1fr)`,
+          }}
+          role="grid"
+          aria-label={`${board.name} 按鈕網格`}
+        >
+          {gridOrder.flat().map((btnId, idx) => {
+            const button = buttonMap[btnId];
+            if (!button) return <div key={btnId ?? `empty-${idx}`} className="grid-empty" />;
+            return (
+              <div
+                key={btnId}
+                role="gridcell"
+                className="grid-cell-wrapper"
+                onClick={() => handleButtonClick(button)}
+              >
+                <BoardButton
+                  button={button}
+                  onNavigate={handleNavigate}
+                  isEditMode={isEditMode}
+                  onEdit={() => setEditingButton(button)}
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
 
       {isEditMode && (

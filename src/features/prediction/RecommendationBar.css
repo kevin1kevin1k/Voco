@@ -1,31 +1,52 @@
 .recommendation-bar {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 0.75rem;
-  background: #f0f4ff;
-  border-radius: 8px;
-  border: 1px solid #d0d8f0;
+  gap: 0.65rem;
+  padding: 0.85rem 1rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.86), var(--grid-surface));
+  border-radius: 20px;
+  border: 1px solid var(--grid-border);
+  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.06);
   flex-wrap: wrap;
 }
 
 .recommendation-label {
-  font-size: 0.95rem;
-  color: #555;
-  font-weight: 600;
+  font-size: 0.98rem;
+  color: var(--grid-text-muted);
+  font-weight: 700;
+  letter-spacing: 0.02em;
 }
 
 .recommendation-btn {
-  padding: 0.5rem 1rem;
-  border: 1px solid #b0c0e8;
-  border-radius: 8px;
-  background: #fff;
-  color: #333;
-  font-size: 1.05rem;
+  padding: 0.65rem 1rem;
+  border: 1px solid color-mix(in srgb, var(--grid-accent) 16%, var(--grid-border));
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), var(--grid-accent-soft));
+  color: var(--grid-text);
+  font-size: 1rem;
+  font-weight: 700;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: border-color 0.16s ease, transform 0.16s ease, background 0.16s ease;
 }
 
 .recommendation-btn:hover {
-  background: #e0e8ff;
+  border-color: color-mix(in srgb, var(--grid-accent) 48%, var(--grid-border));
+  transform: translateY(-1px);
+}
+
+.recommendation-btn:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--grid-accent) 36%, white);
+  outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  .recommendation-bar {
+    padding: 0.8rem 0.9rem;
+    border-radius: 18px;
+  }
+
+  .recommendation-btn {
+    width: 100%;
+    justify-content: center;
+  }
 }

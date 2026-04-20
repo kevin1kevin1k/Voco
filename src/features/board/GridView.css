@@ -1,33 +1,96 @@
 .grid-view {
+  --grid-page-bg: #eef1f6;
+  --grid-surface: #fbfcfe;
+  --grid-surface-strong: #ffffff;
+  --grid-border: #d7dde7;
+  --grid-border-strong: #c5cfde;
+  --grid-text: #1f2937;
+  --grid-text-muted: #526071;
+  --grid-accent: #485a78;
+  --grid-accent-soft: rgba(72, 90, 120, 0.12);
+  --grid-shadow: 0 22px 42px rgba(15, 23, 42, 0.08);
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  padding: 0.5rem;
+  gap: 1rem;
+  padding: 1rem;
   flex: 1;
   min-height: 0;
+  background:
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.78), transparent 30%),
+    linear-gradient(180deg, #f7f9fc 0%, var(--grid-page-bg) 100%);
+}
+
+.grid-view[data-board-theme='family'] {
+  --grid-page-bg: #f5eef6;
+  --grid-surface: #fdf9fd;
+  --grid-surface-strong: #fffefe;
+  --grid-border: #e1d4e6;
+  --grid-border-strong: #cfbdd7;
+  --grid-text: #2d2234;
+  --grid-text-muted: #66556f;
+  --grid-accent: #7b547f;
+  --grid-accent-soft: rgba(123, 84, 127, 0.12);
+}
+
+.grid-view[data-board-theme='medical'] {
+  --grid-page-bg: #f7f0ec;
+  --grid-surface: #fefaf7;
+  --grid-surface-strong: #fffefd;
+  --grid-border: #e7d7cd;
+  --grid-border-strong: #d8c0b2;
+  --grid-text: #32241e;
+  --grid-text-muted: #6a5851;
+  --grid-accent: #9a5f4a;
+  --grid-accent-soft: rgba(154, 95, 74, 0.12);
+}
+
+.grid-view[data-board-theme='places'] {
+  --grid-page-bg: #eef4ef;
+  --grid-surface: #f9fcf9;
+  --grid-surface-strong: #ffffff;
+  --grid-border: #d6e1d4;
+  --grid-border-strong: #bdcebb;
+  --grid-text: #1f2b24;
+  --grid-text-muted: #53665b;
+  --grid-accent: #53785d;
+  --grid-accent-soft: rgba(83, 120, 93, 0.12);
+}
+
+.grid-surface {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  padding: 1rem;
+  border: 1px solid var(--grid-border);
+  border-radius: 28px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.86), var(--grid-surface));
+  box-shadow: var(--grid-shadow);
 }
 
 .grid-container {
   display: grid;
-  gap: 0.5rem;
+  gap: 0.9rem;
   flex: 1;
   height: 100%;
+  min-height: 0;
 }
 
 .grid-empty {
-  background: transparent;
+  border-radius: 22px;
+  border: 1px dashed var(--grid-border);
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .grid-cell-wrapper {
   position: relative;
   width: 100%;
   height: 100%;
+  min-height: 0;
 }
-
 
 .grid-edit-actions {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.75rem;
   flex-shrink: 0;
 }
 
@@ -35,24 +98,72 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px dashed #aaa;
-  border-radius: 12px;
-  background: transparent;
-  color: #666;
-  font-size: clamp(1rem, 2.5vw, 1.4rem);
-  font-weight: 600;
+  border: 1.5px dashed var(--grid-border-strong);
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.8), var(--grid-surface));
+  color: var(--grid-text-muted);
+  font-size: clamp(1rem, 2vw, 1.18rem);
+  font-weight: 700;
+  letter-spacing: 0.01em;
   cursor: pointer;
-  transition: border-color 0.15s, color 0.15s;
+  transition: border-color 0.18s ease, color 0.18s ease, transform 0.18s ease, background 0.18s ease;
   width: 100%;
-  min-height: 48px;
+  min-height: 64px;
   flex-shrink: 0;
 }
 
 .grid-add-button:hover {
-  border-color: #333;
-  color: #333;
+  border-color: var(--grid-accent);
+  color: var(--grid-accent);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), var(--grid-accent-soft));
+  transform: translateY(-1px);
+}
+
+.grid-add-button:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--grid-accent) 32%, white);
+  outline-offset: 3px;
 }
 
 .grid-edit-actions > .grid-add-button {
   flex: 1;
+}
+
+@media (max-width: 900px) {
+  .grid-view {
+    padding: 0.85rem;
+    gap: 0.85rem;
+  }
+
+  .grid-surface {
+    padding: 0.8rem;
+    border-radius: 24px;
+  }
+
+  .grid-container {
+    gap: 0.7rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .grid-view {
+    padding: 0.7rem;
+    gap: 0.7rem;
+  }
+
+  .grid-surface {
+    padding: 0.7rem;
+    border-radius: 20px;
+  }
+
+  .grid-container {
+    gap: 0.65rem;
+  }
+
+  .grid-edit-actions {
+    flex-direction: column;
+  }
+
+  .grid-add-button {
+    min-height: 58px;
+  }
 }
