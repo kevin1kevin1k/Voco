@@ -65,16 +65,17 @@ export default function GridView({ board }) {
             gridTemplateRows: `repeat(${rows}, 1fr)`,
             gridTemplateColumns: `repeat(${columns}, 1fr)`,
           }}
-          role="grid"
-          aria-label={`${board.name} 按鈕網格`}
+          role="group"
+          aria-label={`${board.name} 按鈕群組`}
         >
           {gridOrder.flat().map((btnId, idx) => {
             const button = buttonMap[btnId];
-            if (!button) return <div key={btnId ?? `empty-${idx}`} className="grid-empty" />;
+            if (!button) {
+              return <div key={btnId ?? `empty-${idx}`} className="grid-empty" aria-hidden="true" />;
+            }
             return (
               <div
                 key={btnId}
-                role="gridcell"
                 className="grid-cell-wrapper"
                 onClick={() => handleButtonClick(button)}
               >

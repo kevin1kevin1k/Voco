@@ -37,6 +37,8 @@ npm run dev       # 啟動開發伺服器
 npm run build     # 建立 production build 與 PWA service worker
 npm run preview   # 預覽 production build
 npm run lint      # 執行 ESLint
+npm run verify:pwa        # 檢查 PWA manifest、資產與 build artifacts
+npm run verify:lighthouse # 執行 Lighthouse a11y / best-practices 驗證
 ```
 
 ## 測試與驗證
@@ -46,6 +48,9 @@ npm run test:unit
 npm run test:e2e
 npm run test:e2e -- e2e/add-board.spec.js
 npm run test:e2e -- e2e/grid-presentation.spec.js
+npm run test:e2e -- e2e/user-mode.spec.js
+npm run verify:pwa
+npm run verify:lighthouse
 ```
 
 目前測試涵蓋：
@@ -53,6 +58,8 @@ npm run test:e2e -- e2e/grid-presentation.spec.js
 - `obfParser`、navigation reducer、prediction logic、speech helper 的 unit tests。
 - 新增 board、reload 持久化、VSD 背景圖上傳的 Playwright flows。
 - 成人化 Grid 顯示與推薦列 smoke test。
+- User Mode 主分類切換、Grid 語音、VSD 熱點語音與導航歷史 Playwright flows。
+- PWA manifest / service worker artifact 檢查與 Lighthouse accessibility / best-practices baseline。
 
 ## 專案結構
 
@@ -72,7 +79,8 @@ src/
 
 docs/
 ├── PRD.md                        # 產品需求與目前狀態
-└── TODO.md                       # 分階段實作與追蹤清單
+├── TODO.md                       # 分階段實作與追蹤清單
+└── VERIFICATION.md               # 自動化與人工驗證流程
 
 openspec/
 ├── specs/                        # 已歸檔或穩定的 Spectra specs
@@ -95,10 +103,11 @@ Voco 的 board 資料以 OBF JSON 為核心，並使用 `ext_voco_` 前綴擴充
 - 照護者上傳的 VSD 圖片只保存在目前裝置的 IndexedDB。
 - AI Vision 熱點自動生成尚未實作，目前只保留資料與產品方向。
 - VSD 區域第一版只支援矩形，不支援多邊形或自由形狀。
-- PWA 已可 build 並產生 service worker，但完整 Lighthouse / 離線 / 安裝驗證流程仍待補齊。
+- PWA 已可 build 並產生 service worker，並具備 artifact 檢查、Lighthouse baseline 與人工離線/安裝驗證流程。
 
 ## 相關文件
 
 - [docs/PRD.md](docs/PRD.md)：產品目標、使用者情境、功能需求與目前落差。
 - [docs/TODO.md](docs/TODO.md)：分階段待辦與 checkbox 追蹤。
+- [docs/VERIFICATION.md](docs/VERIFICATION.md)：自動化驗證命令與人工 PWA / a11y 檢查流程。
 - [AGENTS.md](AGENTS.md)：協作規範、回覆格式、專案架構與開發注意事項。

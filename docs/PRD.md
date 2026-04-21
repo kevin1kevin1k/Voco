@@ -2,9 +2,9 @@
 
 ## 文件資訊
 - 產品名稱：智慧數位溝通義肢 / Voco
-- 文件版本：v0.2
-- 文件狀態：初始化結構設計 + 本地 VSD 編輯器
-- 專案階段：User Mode MVP 已具備基線功能，Caregiver Mode 進入本地離線 VSD 編輯首版
+- 文件版本：v0.3
+- 文件狀態：User Mode MVP + 本地 VSD 編輯器 + 互動 / PWA 驗證流程
+- 專案階段：User Mode MVP 已具備基線功能與瀏覽器驗證流程，Caregiver Mode 進入本地離線 VSD 編輯首版
 
 ## 產品背景
 Voco 是一款為高認知能力、具表達性失語症（Broca's Aphasia）的中風長者設計的 Progressive Web App（PWA）AAC 工具。目標使用者理解能力、視覺與聽覺正常，但因語言運動區受損，難以順暢說出想法。
@@ -151,12 +151,13 @@ Voco 是一款為高認知能力、具表達性失語症（Broca's Aphasia）的
 - 已設定 PWA build，可產出 service worker。
 - 已補上基線 PWA icon 與住家 mock VSD 場景資產。
 - 已有首版 Caregiver VSD 編輯能力，可本地建立 VSD 頁面、上傳背景圖、建立與編輯矩形區域。
+- 已有 User Mode E2E 驗證，覆蓋主分類切換、Grid 發聲、VSD 熱點發聲與返回/首頁流程。
+- 已有 PWA artifact 檢查與 Lighthouse accessibility / best-practices baseline。
 
 ### 已知落差
-- README 仍是預設 Vite 內容。
 - Caregiver Mode 目前僅支援本地離線 VSD 編輯，尚未提供雲端同步、AI 建置精靈與草稿/發布流程。
 - VSD 區域目前只支援矩形，不支援多邊形或自由形狀。
-- 尚未建立完整的互動 / PWA 驗證流程與 README 專案化說明。
+- PWA 離線啟動與主畫面安裝目前有人工驗證流程，尚未納入 CI 自動化。
 
 ## User Mode MVP 驗收標準
 1. 使用者可從首頁穩定進入現有板面，且導航不會出現死路。
@@ -171,4 +172,4 @@ Voco 是一款為高認知能力、具表達性失語症（Broca's Aphasia）的
 - 擴充照護者模式的資訊架構、內容編輯流程與審核流程。
 - 導入更穩定的推薦規則與個人化調整。
 - 加入雲端同步、AI 建置精靈與更完整的資產治理流程。
-- 補齊測試、自動化驗證與內容治理流程。
+- 補齊 CI 自動化驗證、內容治理流程與更完整的裝置相容性矩陣。
