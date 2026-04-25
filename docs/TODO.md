@@ -120,6 +120,17 @@
   依賴關係：既有 edit mode、board persistence 與 VSD renderer 已存在。
   建議產出物：本地 VSD 編輯流程、IndexedDB 資產儲存、更新後的 caregiver UI。
 
+- [x] 支援頁面入口與 Grid 按鈕圖片
+  目的：讓照護者可用照片或實物圖強化頁面入口與詞彙辨識，而不只依賴文字或符號。
+  完成條件：
+  - [x] 新增頁面時可拍照或上傳圖片作為首頁入口圖片
+  - [x] 新增 Grid 按鈕時可拍照或上傳圖片作為按鈕圖片
+  - [x] 編輯既有 Grid 按鈕時可新增、替換或移除圖片
+  - [x] 圖片 blob 與 board metadata 分開儲存，重新整理後仍可載入
+  - [x] 文件明確註記第一版不做裁切、壓縮、雲端同步或自訂相機 UI
+  依賴關係：既有 IndexedDB asset storage 與 board persistence。
+  建議產出物：共用圖片上傳欄位、更新後的 board/image metadata 流程、E2E 測試。
+
 - [ ] 整理使用紀錄的單一資料來源
   目的：避免 `clickHistory` 與 `usageLogs` 長期各自演化，造成後續分析成本升高。
   完成條件：

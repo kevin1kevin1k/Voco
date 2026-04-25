@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import {
   getBoardDisplayType,
   getGridOrder,
+  mergeBoardImages,
   parseButtons,
   parseHotspot,
 } from './obfParser.js';
@@ -64,4 +65,23 @@ test('getGridOrder returns grid order when present and an empty list otherwise',
     [['btn-wife', 'btn-son']]
   );
   assert.deepEqual(getGridOrder({}), []);
+});
+
+test('mergeBoardImages preserves user uploaded image metadata alongside static images', () => {
+  const images = mergeBoardImages(
+    [
+      { id: 'img-family', symbol: '家' },
+      { id: 'img-static', url: '/static.svg' },
+    ],
+    [
+      { id: 'img-family', ext_voco_asset_id: 'asset-family', content_type: 'image/png' },
+      { id: 'img-custom', ext_voco_asset_id: 'asset-custom', content_type: 'image/png' },
+    ]
+  );
+
+  assert.deepEqual(images, [
+    { id: 'img-family', ext_voco_asset_id: 'asset-family', content_type: 'image/png' },
+    { id: 'img-static', url: '/static.svg' },
+    { id: 'img-custom', ext_voco_asset_id: 'asset-custom', content_type: 'image/png' },
+  ]);
 });

@@ -31,6 +31,20 @@ export function parseButtons(board) {
   }));
 }
 
+export function mergeBoardImages(staticImages = [], storedImages = []) {
+  const storedImageMap = new Map(storedImages.map((image) => [image.id, image]));
+  const merged = staticImages.map((image) => storedImageMap.get(image.id) || image);
+  const staticImageIds = new Set(staticImages.map((image) => image.id));
+
+  for (const image of storedImages) {
+    if (!staticImageIds.has(image.id)) {
+      merged.push(image);
+    }
+  }
+
+  return merged;
+}
+
 /**
  * 解析 VSD 熱點座標（百分比 → 相對定位）
  * home.obf.json 中的座標以百分比表示
@@ -70,6 +84,7 @@ function mergeStoredBoard(staticBoard, storedBoard) {
   if (!storedBoard) return staticBoard;
 
   const allowStoredVsdAssets = storedBoard.ext_voco_user_owned_vsd === true;
+  const images = mergeBoardImages(staticBoard.images || [], storedBoard.images || []);
 
   return {
     ...staticBoard,
@@ -81,9 +96,7 @@ function mergeStoredBoard(staticBoard, storedBoard) {
     ext_voco_background: allowStoredVsdAssets
       ? storedBoard.ext_voco_background ?? staticBoard.ext_voco_background
       : staticBoard.ext_voco_background,
-    images: allowStoredVsdAssets
-      ? storedBoard.images ?? staticBoard.images
-      : staticBoard.images,
+    images,
   };
 }
 

@@ -3,7 +3,7 @@ export async function prepareFreshApp(page) {
     localStorage.clear();
 
     try {
-      indexedDB.deleteDatabase('voco-assets');
+      indexedDB.deleteDatabase('voco_assets');
     } catch {
       // Tests can still run if IndexedDB cleanup is unavailable in the browser.
     }

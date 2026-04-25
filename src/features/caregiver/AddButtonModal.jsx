@@ -2,16 +2,22 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateBoard } from '../board/boardSlice';
 import ModalShell from './ModalShell';
+import ImageUploadField from './ImageUploadField';
+import { createUploadedImageEntry, upsertImage } from '../../utils/imageAssets';
 
 export default function AddButtonModal({ board, onClose }) {
   const dispatch = useDispatch();
   const [label, setLabel] = useState('');
   const [vocalization, setVocalization] = useState('');
+  const [imageFile, setImageFile] = useState(null);
+  const [imageError, setImageError] = useState('');
+  const [isSaving, setIsSaving] = useState(false);
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
     const trimmedLabel = label.trim();
     const trimmedVoc = vocalization.trim() || trimmedLabel;
     const newId = `btn-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+    let nextImages = board.images || [];
 
     const newButton = {
       id: newId,
@@ -19,6 +25,21 @@ export default function AddButtonModal({ board, onClose }) {
       vocalization: trimmedVoc,
       background_color: 'rgb(240, 240, 240)',
     };
+
+    try {
+      setIsSaving(true);
+      setImageError('');
+
+      if (imageFile) {
+        const imageEntry = await createUploadedImageEntry(imageFile, `button-${newId}`);
+        nextImages = upsertImage(nextImages, imageEntry);
+        newButton.image_id = imageEntry.id;
+      }
+    } catch {
+      setImageError('圖片儲存失敗，請重新選擇圖片。');
+      setIsSaving(false);
+      return;
+    }
 
     const updatedButtons = [...board.buttons, newButton];
 
@@ -50,7 +71,7 @@ export default function AddButtonModal({ board, onClose }) {
       order: updatedOrder,
     };
 
-    dispatch(updateBoard({ ...board, buttons: updatedButtons, grid: updatedGrid }));
+    dispatch(updateBoard({ ...board, buttons: updatedButtons, images: nextImages, grid: updatedGrid }));
     onClose();
   };
 
@@ -59,7 +80,7 @@ export default function AddButtonModal({ board, onClose }) {
       title="新增按鈕"
       onConfirm={handleConfirm}
       onClose={onClose}
-      confirmDisabled={label.trim() === ''}
+      confirmDisabled={label.trim() === '' || isSaving}
     >
       <div className="modal-field">
         <label htmlFor="add-btn-label">按鈕文字</label>
@@ -80,6 +101,18 @@ export default function AddButtonModal({ board, onClose }) {
           onChange={(e) => setVocalization(e.target.value)}
         />
       </div>
+      <ImageUploadField
+        id="add-btn-image"
+        label="按鈕圖片"
+        previewLabel={label}
+        selectedFile={imageFile}
+        onFileSelect={(file) => {
+          setImageFile(file);
+          setImageError('');
+        }}
+        onRemove={() => setImageFile(null)}
+      />
+      {imageError && <p className="modal-error">{imageError}</p>}
     </ModalShell>
   );
 }

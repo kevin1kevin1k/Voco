@@ -10,6 +10,7 @@ Voco 是一款為「高認知能力、具表達性失語症（Broca's Aphasia）
 - `語音輸出`：使用 Web Speech API，優先使用 `zh-TW`，並具備中文與瀏覽器預設 fallback。
 - `輕量推薦`：根據本地點擊歷史與語意關聯產生 Grid 推薦詞彙。
 - `照護者 VSD 編輯`：可在本地新增 VSD 頁面、上傳背景圖、建立與編輯矩形區域。
+- `本地圖片管理`：可拍照或上傳照片作為頁面入口圖片與 Grid 按鈕圖片。
 
 ## 技術棧
 
@@ -20,6 +21,7 @@ Voco 是一款為「高認知能力、具表達性失語症（Broca's Aphasia）
 - Open Board Format（OBF）JSON + `ext_voco_` 擴充欄位
 - `localStorage` 儲存 board metadata
 - `IndexedDB` 儲存照護者上傳的 VSD 背景圖 blob
+- `IndexedDB` 儲存照護者上傳的頁面入口與按鈕圖片 blob
 - Playwright E2E testing
 - Node 內建 `node:test` unit testing
 
@@ -103,6 +105,7 @@ Voco 的 board 資料以 OBF JSON 為核心，並使用 `ext_voco_` 前綴擴充
 - 照護者上傳的 VSD 圖片只保存在目前裝置的 IndexedDB。
 - AI Vision 熱點自動生成尚未實作，目前只保留資料與產品方向。
 - VSD 區域第一版只支援矩形，不支援多邊形或自由形狀。
+- 頁面入口與 Grid 按鈕圖片第一版不支援裁切、壓縮、雲端同步或自訂相機預覽。
 - PWA 已可 build 並產生 service worker，並具備 artifact 檢查、Lighthouse baseline 與人工離線/安裝驗證流程。
 
 ## 相關文件

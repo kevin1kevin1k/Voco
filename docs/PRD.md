@@ -2,9 +2,9 @@
 
 ## 文件資訊
 - 產品名稱：智慧數位溝通義肢 / Voco
-- 文件版本：v0.3
-- 文件狀態：User Mode MVP + 本地 VSD 編輯器 + 互動 / PWA 驗證流程
-- 專案階段：User Mode MVP 已具備基線功能與瀏覽器驗證流程，Caregiver Mode 進入本地離線 VSD 編輯首版
+- 文件版本：v0.4
+- 文件狀態：User Mode MVP + 本地 VSD 編輯器 + 圖片化內容管理
+- 專案階段：User Mode MVP 已具備基線功能與瀏覽器驗證流程，Caregiver Mode 進入本地離線內容與圖片編輯首版
 
 ## 產品背景
 Voco 是一款為高認知能力、具表達性失語症（Broca's Aphasia）的中風長者設計的 Progressive Web App（PWA）AAC 工具。目標使用者理解能力、視覺與聽覺正常，但因語言運動區受損，難以順暢說出想法。
@@ -57,6 +57,12 @@ Voco 是一款為高認知能力、具表達性失語症（Broca's Aphasia）的
 3. 照護者手動框選矩形區域，填入區域文字與語音內容。
 4. 照護者可直接拖拉、縮放、修改或刪除區域，變更立即套用到使用者模式。
 
+### 情境四：照護者用照片強化頁面入口與 Grid 按鈕
+1. 照護者新增頁面時，可拍照或上傳照片作為首頁入口圖片。
+2. 照護者新增或編輯 Grid 按鈕時，可拍照或上傳照片作為按鈕圖片。
+3. 圖片只儲存在目前裝置，重新整理後仍可顯示。
+4. 照護者可移除已設定的圖片，讓按鈕回到文字或符號呈現。
+
 ## 功能需求
 ### 1. 階層式導航
 - 首頁需顯示大分類，例如住家、地點、家人、醫療。
@@ -87,6 +93,8 @@ Voco 是一款為高認知能力、具表達性失語症（Broca's Aphasia）的
 ### 5. Caregiver Mode
 - 首版需支援本地離線的 VSD 背景圖上傳與區域編輯 UI。
 - 照護者需可建立 VSD 頁面、替換背景圖、建立區域、拖拉縮放區域、編輯區域文字與刪除區域。
+- 照護者需可拍照或上傳圖片作為頁面入口圖片與 Grid 按鈕圖片。
+- 照護者需可替換或移除已設定的頁面入口圖片與 Grid 按鈕圖片。
 - 第一版圖片與板面資料只保留在當前裝置，不提供雲端同步。
 - 至少需要有可儲存與分析使用紀錄的前端狀態。
 - 未來 AI 建置精靈需以照片、候選熱點、語音文案為主要輸入輸出。
@@ -138,6 +146,10 @@ Voco 是一款為高認知能力、具表達性失語症（Broca's Aphasia）的
 - 背景圖二進位需與 board JSON 分開儲存：
   - board metadata 存於 `localStorage`
   - 上傳圖片 blob 存於 `IndexedDB`
+- 頁面入口圖片與 Grid 按鈕圖片沿用 OBF `button.image_id` 指向 `images[]`：
+  - 圖片 metadata 存於 board `images[]`
+  - 上傳圖片 blob 存於 `IndexedDB`
+  - 手機拍照使用原生檔案輸入的 `capture="environment"`，不做自訂相機 UI
 
 ## 目前專案現況
 ### 已存在的原型能力
@@ -151,12 +163,14 @@ Voco 是一款為高認知能力、具表達性失語症（Broca's Aphasia）的
 - 已設定 PWA build，可產出 service worker。
 - 已補上基線 PWA icon 與住家 mock VSD 場景資產。
 - 已有首版 Caregiver VSD 編輯能力，可本地建立 VSD 頁面、上傳背景圖、建立與編輯矩形區域。
+- 已有頁面入口圖片與 Grid 按鈕圖片的本地上傳、預覽、移除與 reload 持久化能力。
 - 已有 User Mode E2E 驗證，覆蓋主分類切換、Grid 發聲、VSD 熱點發聲與返回/首頁流程。
 - 已有 PWA artifact 檢查與 Lighthouse accessibility / best-practices baseline。
 
 ### 已知落差
 - Caregiver Mode 目前僅支援本地離線 VSD 編輯，尚未提供雲端同步、AI 建置精靈與草稿/發布流程。
 - VSD 區域目前只支援矩形，不支援多邊形或自由形狀。
+- 頁面與按鈕圖片目前不支援裁切、壓縮、雲端同步或自訂相機預覽。
 - PWA 離線啟動與主畫面安裝目前有人工驗證流程，尚未納入 CI 自動化。
 
 ## User Mode MVP 驗收標準

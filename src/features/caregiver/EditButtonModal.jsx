@@ -2,6 +2,14 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateBoard, deleteButton } from '../board/boardSlice';
 import ModalShell from './ModalShell';
+import ImageUploadField from './ImageUploadField';
+import { deleteImageAsset } from '../../utils/boardStorage';
+import {
+  createUploadedImageEntry,
+  isImageReferenced,
+  removeImageIfUnused,
+  upsertImage,
+} from '../../utils/imageAssets';
 import './EditButtonModal.css';
 
 export default function EditButtonModal({ button, board, onClose }) {
@@ -13,7 +21,12 @@ export default function EditButtonModal({ button, board, onClose }) {
   const [hotspotWidth, setHotspotWidth] = useState(button.ext_voco_hotspot?.width ?? '');
   const [hotspotHeight, setHotspotHeight] = useState(button.ext_voco_hotspot?.height ?? '');
   const [confirmDelete, setConfirmDelete] = useState(false);
+  const [imageFile, setImageFile] = useState(null);
+  const [removeImage, setRemoveImage] = useState(false);
+  const [imageError, setImageError] = useState('');
+  const [isSaving, setIsSaving] = useState(false);
   const hasExistingButton = board.buttons.some((btn) => btn.id === button.id);
+  const currentImage = board.images?.find((image) => image.id === button.image_id) || null;
 
   const normalizePercent = (value, fallback) => {
     const parsed = Number(value);
@@ -21,13 +34,14 @@ export default function EditButtonModal({ button, board, onClose }) {
     return Number(Math.min(100, Math.max(0, parsed)).toFixed(2));
   };
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
     const trimmedLabel = label.trim();
     const updatedButton = {
       ...button,
       label: trimmedLabel,
       vocalization: vocalization.trim() || trimmedLabel,
     };
+    let nextImages = board.images || [];
 
     if (button.ext_voco_hotspot) {
       updatedButton.ext_voco_hotspot = {
@@ -40,18 +54,51 @@ export default function EditButtonModal({ button, board, onClose }) {
       };
     }
 
+    try {
+      setIsSaving(true);
+      setImageError('');
+
+      if (removeImage || imageFile) {
+        delete updatedButton.image_id;
+        nextImages = removeImageIfUnused(board, button.image_id, button.id);
+
+        if (currentImage?.ext_voco_asset_id && nextImages.length !== (board.images || []).length) {
+          await deleteImageAsset(currentImage.ext_voco_asset_id);
+        }
+      }
+
+      if (imageFile) {
+        const imageEntry = await createUploadedImageEntry(imageFile, `button-${button.id}`);
+        nextImages = upsertImage(nextImages, imageEntry);
+        updatedButton.image_id = imageEntry.id;
+      }
+    } catch {
+      setImageError('圖片儲存失敗，請重新選擇圖片。');
+      setIsSaving(false);
+      return;
+    }
+
     const updatedButtons = hasExistingButton
       ? board.buttons.map((btn) => (btn.id === button.id ? updatedButton : btn))
       : [...board.buttons, updatedButton];
 
-    dispatch(updateBoard({ ...board, buttons: updatedButtons }));
+    dispatch(updateBoard({ ...board, buttons: updatedButtons, images: nextImages }));
     onClose();
   };
 
-  const handleDeleteClick = () => {
+  const handleDeleteClick = async () => {
     if (!confirmDelete) {
       setConfirmDelete(true);
     } else {
+      if (currentImage?.ext_voco_asset_id && !isImageReferenced(board, button.image_id, button.id)) {
+        await deleteImageAsset(currentImage.ext_voco_asset_id);
+        dispatch(
+          updateBoard({
+            ...board,
+            images: (board.images || []).filter((image) => image.id !== button.image_id),
+          })
+        );
+      }
       dispatch(deleteButton({ boardId: board.id, buttonId: button.id }));
       onClose();
     }
@@ -67,7 +114,7 @@ export default function EditButtonModal({ button, board, onClose }) {
       title="編輯按鈕"
       onConfirm={handleConfirm}
       onClose={handleClose}
-      confirmDisabled={label.trim() === ''}
+      confirmDisabled={label.trim() === '' || isSaving}
     >
       <div className="modal-field">
         <label htmlFor="edit-btn-label">按鈕文字</label>
@@ -88,6 +135,24 @@ export default function EditButtonModal({ button, board, onClose }) {
           onChange={(e) => setVocalization(e.target.value)}
         />
       </div>
+      <ImageUploadField
+        id="edit-btn-image"
+        label="按鈕圖片"
+        previewLabel={label}
+        image={currentImage}
+        selectedFile={imageFile}
+        isRemoved={removeImage}
+        onFileSelect={(file) => {
+          setImageFile(file);
+          setRemoveImage(false);
+          setImageError('');
+        }}
+        onRemove={() => {
+          setImageFile(null);
+          setRemoveImage(true);
+        }}
+      />
+      {imageError && <p className="modal-error">{imageError}</p>}
       {button.ext_voco_hotspot && (
         <>
           <div className="modal-field">
