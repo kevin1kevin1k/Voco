@@ -56,12 +56,14 @@ export default function BoardButton({ button, onNavigate, isEditMode, onEdit }) 
       onClick={handleClick}
       aria-label={button.vocalization || button.label}
     >
-      {image?.symbol && !assetImageSrc && !image?.url && (
-        <span className="button-symbol">{image.symbol}</span>
-      )}
-      {(assetImageSrc || image?.url) && (
-        <img className="button-image" src={assetImageSrc || image.url} alt="" />
-      )}
+      <div className="button-media" aria-hidden="true">
+        {image?.symbol && !assetImageSrc && !image?.url && (
+          <span className="button-symbol">{image.symbol}</span>
+        )}
+        {(assetImageSrc || image?.url) && (
+          <img className="button-image" src={assetImageSrc || image.url} alt="" />
+        )}
+      </div>
       <span className="button-label">
         {button.label}
         {isEditMode && <span className="button-edit-hint">✎</span>}

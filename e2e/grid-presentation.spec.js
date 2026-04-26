@@ -27,3 +27,29 @@ test('family grid renders with a board theme and keeps recommendations visible a
   const recommendationRegion = page.getByRole('region', { name: '推薦詞彙' });
   await expect(recommendationRegion).toBeVisible();
 });
+
+test('grid buttons render emoji as a large hero media area', async ({ page }) => {
+  const homeButton = page.locator('.grid-container').getByRole('button', { name: '住家' });
+  const symbol = homeButton.locator('.button-symbol');
+
+  await expect(symbol).toBeVisible();
+
+  const dimensions = await homeButton.evaluate((button) => {
+    const symbolElement = button.querySelector('.button-symbol');
+    if (!symbolElement) return null;
+
+    const buttonRect = button.getBoundingClientRect();
+    const symbolRect = symbolElement.getBoundingClientRect();
+
+    return {
+      buttonHeight: buttonRect.height,
+      buttonWidth: buttonRect.width,
+      symbolHeight: symbolRect.height,
+      symbolWidth: symbolRect.width,
+    };
+  });
+
+  expect(dimensions).not.toBeNull();
+  expect(dimensions.symbolHeight).toBeGreaterThan(dimensions.buttonHeight * 0.25);
+  expect(dimensions.symbolWidth).toBeGreaterThan(dimensions.buttonWidth * 0.25);
+});

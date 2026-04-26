@@ -99,3 +99,39 @@ test('編輯頁面時可新增與移除首頁入口圖片', async ({ page }) => 
   await page.getByRole('button', { name: '回首頁' }).click();
   await expect(entryButton.locator('img.button-image')).toHaveCount(0);
 });
+
+test('上傳後的圖片在按鈕中以大圖主視覺呈現', async ({ page }) => {
+  await enterEditMode(page);
+  await createGridBoard(page, '大圖頁');
+
+  await page.getByRole('button', { name: '新增按鈕' }).click();
+  await page.getByRole('textbox', { name: '按鈕文字', exact: true }).fill('照片');
+  await page.getByLabel('按鈕圖片').setInputFiles('public/images/scenes/living-room.png');
+  await page.getByRole('button', { name: '確認' }).click();
+
+  const photoButton = page.getByRole('button', { name: '照片' });
+  const photoImage = photoButton.locator('img.button-image');
+  await expect(photoImage).toBeVisible();
+
+  const dimensions = await photoButton.evaluate((button) => {
+    const imageElement = button.querySelector('img.button-image');
+    if (!imageElement) return null;
+
+    const buttonRect = button.getBoundingClientRect();
+    const imageRect = imageElement.getBoundingClientRect();
+    const style = window.getComputedStyle(imageElement);
+
+    return {
+      buttonHeight: buttonRect.height,
+      buttonWidth: buttonRect.width,
+      imageHeight: imageRect.height,
+      imageWidth: imageRect.width,
+      objectFit: style.objectFit,
+    };
+  });
+
+  expect(dimensions).not.toBeNull();
+  expect(dimensions.objectFit).toBe('contain');
+  expect(dimensions.imageHeight).toBeGreaterThan(dimensions.buttonHeight * 0.3);
+  expect(dimensions.imageWidth).toBeGreaterThan(dimensions.buttonWidth * 0.4);
+});
